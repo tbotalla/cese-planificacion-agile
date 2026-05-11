@@ -5,32 +5,32 @@
 
 
 % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
-\titulo{Título del proyecto} 
+\titulo{Sistema de Telemetría y Detección de Eventos para Motocicletas} 
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
-%\posgrado{Carrera de Especialización en Sistemas Embebidos} 
+\posgrado{Carrera de Especialización en Sistemas Embebidos} 
 %\posgrado{Carrera de Especialización en Internet de las Cosas} 
-\posgrado{Carrera de Especialización en Inteligencia Artificial}
+%\posgrado{Carrera de Especialización en Inteligencia Artificial}
 %\posgrado{Maestría en Sistemas Embebidos} 
 %\posgrado{Maestría en Internet de las cosas}
 
 % Tu nombre, se puede usar el cualquier lugar del documento con el comando \authorname
 % IMPORTANTE: no omitir titulaciones ni tildación en los nombres, también se recomienda escribir los nombres completos (tal cual los tienen en su documento)
-\autor{Título y Nombre del autor}
+\autor{Ing. Tomás Enrique Botalla}
 
 % El nombre del director y co-director, se puede usar el cualquier lugar del documento con el comando \supname y \cosupname y \pertesupname y \pertecosupname
-\director{Título y Nombre del director}
-\pertenenciaDirector{pertenencia} 
+\director{Esp. Ing. Germán Eloy Cardozo}
+\pertenenciaDirector{UNLAM} 
 \codirector{} % para que aparezca en la portada se debe descomentar la opción codirector en los parámetros de documentclass
-\pertenenciaCoDirector{FIUBA}
+\pertenenciaCoDirector{}
 
 % Nombre del cliente, quien va a aprobar los resultados del proyecto, se puede usar con el comando \clientename y \empclientename
-\cliente{Nombre del cliente}
-\empresaCliente{Empresa del cliente}
+\cliente{Jurado CESE}
+\empresaCliente{FIUBA}
  
-\fechaINICIO{30 de abril de 2023}		%Fecha de inicio de la cursada de GdP \fechaInicioName
-\fechaFINALPlan{18 de junio de 2023} 	%Fecha de final de cursada de GdP
-\fechaFINALTrabajo{15 de mayo de 2024}	%Fecha de defensa pública del trabajo final
+\fechaINICIO{28 de abril de 2026}		%Fecha de inicio de la cursada de GdP \fechaInicioName
+\fechaFINALPlan{16 de junio de 2026} 	%Fecha de final de cursada de GdP
+\fechaFINALTrabajo{SIN DEFINIR}	%Fecha de defensa pública del trabajo final
 
 
 \begin{document}
@@ -59,7 +59,7 @@
 \rowcolor[HTML]{C0C0C0} 
 Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios realizados} & Fecha      \\ \hline
 0      & Creación del documento                                 &\fechaInicioName \\ \hline
-%1      & Se completa hasta el punto 5 inclusive                & {día} de {mes} de 202X \\ \hline
+1      & Se completa hasta el punto 5 inclusive                & {10} de {mayo} de 2026 \\ \hline
 %2      & Se completa hasta el punto 9 inclusive
 %		  Se puede agregar algo más \newline
 %		  En distintas líneas \newline
@@ -85,7 +85,7 @@ Buenos Aires, \fechaInicioName
 
 \vspace{2cm}
 
-Por medio de la presente se acuerda con el \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'' y consistirá en \textcolor{red}{la implementación de un prototipo de un sistema de control de temperatura de una caldera industrial}. El trabajo tendrá un presupuesto preliminar estimado de \textcolor{red}{600} horas y un costo estimado de \textcolor{red}{\$ XXX}, con fecha de inicio el \fechaInicioName\hspace{1px} y fecha de presentación pública el \fechaFinalName.
+Por medio de la presente se acuerda con el \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'' y consistirá en el desarrollo de un sistema embebido de adquisición, registro y transmisión en tiempo real de datos de telemetría para motocicletas. El trabajo tendrá un presupuesto preliminar estimado de \textcolor{red}{600} horas y un costo estimado de \textcolor{red}{\$ XXX}, con fecha de inicio el \fechaInicioName\hspace{1px} y fecha de presentación pública el \fechaFinalName.
 
 Se adjunta a esta acta la planificación inicial.
 
@@ -101,57 +101,38 @@ Se adjunta a esta acta la planificación inicial.
 \end{table}
 
 
-
-
 \section{1. Descripción técnica-conceptual del proyecto a realizar}
 \label{sec:descripcion}
 
-\begin{consigna}{red} % ELIMINAR \begin{consigna}{red} y \end{consigna}{red} en las secciones que vayan completando para cada entrega parcial.
-El objetivo es que el lector, en una o dos páginas, exponga de qué se trata el proyecto y cuáles son sus desafíos, cuál es la motivación para realizarlo y su importancia.
+El proyecto consiste en el desarrollo de un un sistema embebido de adquisición, registro y transmisión de telemetría para motocicletas. El dispositivo está diseñado para capturar variables cinemáticas, ambientales y eléctricas, con un enfoque mixto entre el monitoreo de la conducción y la documentación de rutas.
 
-Se debe introducir el contexto del proyecto, el estado del arte en la temática, describir la propuesta de valor, cuál es el problema que atiende y cuál es la solución que se propone. Se debe dar una descripción funcional de la solución que incluya un diagrama en bloques.
+El mismo se encuadra como un emprendimiento personal en el marco del Trabajo Final de la \textit{Carrera de Especialización en Sistemas Embebidos} (CESE) de la \textit{Facultad de Ingeniería de la Universidad de Buenos Aires} (FIUBA). La motivación principal surge de la dificultad que enfrentan los motociclistas para acceder a datos precisos sobre su estilo de manejo y el comportamiento dinámico de su vehículo sin recurrir a equipos de alta competición costosos.
 
-Puede ser útil incluir en esta sección la respuesta a alguna de estas preguntas:
+En comparación con el estado del arte actual, donde estos sistemas suelen ser costosos y están orientados casi exclusivamente a la competición profesional, esta solución destaca por su accesibilidad y su capacidad de integración. A diferencia de los dispositivos comerciales estándar que se limitan al registro de posición y velocidad, la propuesta integra variables cinemáticas como el ángulo de inclinación, y el estado eléctrico y térmico del vehículo en un solo equipo.
+
+Para abordar esta problemática, el proyecto propone combinar la captura de datos con la transmisión de telemetría en vivo, funcionando como una caja negra que preserva la ubicación exacta y los parámetros dinámicos previos a un incidente.
+
+El sistema centraliza la información de múltiples sensores mediante interfaces de comunicación comunes (\textit{Inter-Integrated Circuit} (I2C), \textit{Serial Peripheral Interface} (SPI), \textit{Universal Asynchronous Receiver-Transmitter} (UART)). Sus funciones principales incluyen:
 
 \begin{itemize}
-	\item ¿Cuál es el contexto del proyecto, es un emprendimiento personal, un proyecto para una empresa, es parte del programa de vinculación con empresas del posgrado?
-	\item ¿Existen o aplican condiciones especiales al proyecto, financiamiento de algún programa público o privado, acuerdos de confidencialidad, acuerdos sobre la propiedad intelectual de los entregables u otros?
-	\item ¿Cómo se compara la solución propuesta con el estado del arte en el campo de aplicación? ¿En qué aspectos destaca?
-	\item ¿Ayuda a la explicación si se incluye un lienzo Canvas del Modelo de Negocio?
-	\item ¿En qué estado del ciclo de vida está la solución que se propone?
-	\item ¿Cuáles son las características del cliente (el adoptante de los entregables del proyecto) qué valora, qué necesita?
-	\item ¿Por dónde pasa la innovación?
+    \item \textbf{Registro de ruta y visualización de viajes:} utiliza un módulo \textit{Global Positioning System} (GPS) para obtener posición y velocidad con alta precisión. Estos datos permiten generar mapas de recorrido dinámicos en una aplicación web, permitiendo al usuario analizar su trayectoria y velocidad en cada tramo.
+    \item \textbf{Detección de eventos críticos:} registra caídas, maniobras bruscas (aceleración/frenado) e inclinaciones excesivas. Al detectar un evento, el sistema lo regsitra para su posterior análisis.
+    \item \textbf{Análisis dinámico:} captura datos de una \textit{IMU} (Inertial Measurement Unit) y un barómetro para estimar ángulos de inclinación, aceleración y altitud.
+    \item \textbf{Gestión de datos:} registra la información en una tarjeta \textit{microSD} mediante un esquema de \textit{double buffering} y transmite vía \textit{Bluetooth} a una aplicación web.
+    \item \textbf{Robustez y autonomía:} incluye un \textit{watchdog} para recuperación automática ante fallos y modos de bajo consumo para optimizar el uso de la batería de la moto.
 \end{itemize}
 
-La descripción técnica-conceptual \textbf{debe incluir al menos un diagrama en bloques del sistema} y descripción funcional de la solución propuesta.
-
-Las figuras se deben mencionar en el texto ANTES de que aparezcan con una frase como la siguiente: ``En la figura \ref{fig:diagBloques} se presenta el diagrama en bloques del sistema. Se observa que...''.  La regla es que las figuras nunca pueden ir antes de ser mencionadas en el texto, porque sino el lector no entiende por qué de pronto aparece una figura.
+En la figura \ref{fig:diagBloques} se presenta el diagrama en bloques del sistema. Se observa un microcontrolador encargado de coordinar la lectura de todos los sensores y escribir hacia las diferentes salidas del sistema.
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=.65\textwidth]{./Figuras/diagBloques.png}
+\includegraphics[width=.65\textwidth]{./Figuras/Diagrama bloques.png}
 \caption{Diagrama en bloques del sistema.}
 \label{fig:diagBloques}
 \end{figure}
 
-\vspace{25px}
-
-El tamaño del texto en TODAS las figuras debe ser adecuado \textbf{para que NO pase lo que ocurre en la figura \ref{fig:diagBloques}}, donde el lector debe esforzarse para poder leer el texto. 
-
-Los colores usados en el diagrama deben ser adecuados, tal que ayuden a comprender mejor el diagrama. Se recomienda evitar colores primarios (como rojo, verde o cyan) y usar la gama de colores pastel.
-
-\end{consigna} % ELIMINAR \begin{consigna}{red} y \end{consigna}{red} en las secciones que vayan completando para cada entrega parcial.
-
 \section{2. Identificación y análisis de los interesados}
 \label{sec:interesados}
-
-\begin{consigna}{red} % ELIMINAR \begin{consigna}{red} y \end{consigna}{red} en las secciones que vayan completando para cada entrega parcial.
-\textbf{Nota importante:} borrar esto y todas las consignas en color rojo antes de entregar este documento). Esto se hace eliminando el par de comandos que forman el bloque consigna, \verb!\begin{consigna}{red}! y \verb!\end{consigna}{red}! del código. 
- 
-Es inusual que una misma persona esté en más de un rol, incluso en proyectos chicos. Si se considera que una persona cumple dos o más roles, entonces \textbf{solo dejarla en el rol más importante}. 
-
-Por ejemplo, si una persona es Cliente pero también colabora u orienta, dejarla solo como Cliente. Si una persona es el Responsable, \textbf{no debe ser colocado también como miembro del equipo}.
-
 
 \begin{table}[ht]
 %\caption{Identificación de los interesados}
@@ -160,90 +141,67 @@ Por ejemplo, si una persona es Cliente pero también colabora u orienta, dejarla
 \hline
 \rowcolor[HTML]{C0C0C0} 
 Rol           & Nombre y Apellido & Organización 	& Puesto 	\\ \hline
-Auspiciante   &                   &              	&        	\\ \hline
-Cliente       & \clientename      &\empclientename	&        	\\ \hline
-Impulsor      &                   &              	&        	\\ \hline
+%Auspiciante   &                   &              	&        	\\ \hline
+Cliente       & \clientename      &\empclientename	& Jugaro del CESE       	\\ \hline
+%Impulsor      &                   &              	&        	\\ \hline
 Responsable   & \authorname       & FIUBA        	& Alumno 	\\ \hline
-Colaboradores &                   &              	&        	\\ \hline
+%Colaboradores &                   &              	&        	\\ \hline
 Orientador    & \supname	      & \pertesupname 	& Director del Trabajo Final \\ \hline
-Equipo        & miembro1 \newline 
-				miembro2          &              	&        	\\ \hline
-Opositores    &                   &              	&        	\\ \hline
-Usuario final &                   &              	&        	\\ \hline
+%Equipo        & \authorname       & FIUBA            & Alumno       	\\ \hline
+%Opositores    & -                 & -            	& -       	\\ \hline
+Usuario final & Conductores de motocicletas & -             	& -       	\\ \hline
 \end{tabularx}
 \end{table}
-
-El Director suele ser uno de los orientadores.
-
-No dejar celdas vacías; si no hay nada que poner en una celda colocar un signo ``-''.
-
-No dejar filas vacías; si no hay nada que poner en una fila entonces eliminarla.
-
-Es deseable listar a continuación las principales características de cada interesado.
- 
-Por ejemplo:
-\begin{itemize}
-	\item Orientador: la Dra. Ing. María Gómez es experta en la temática y va a ayudar con la definición de los requerimientos y el desarrollo del firmware del embebido.
-	\item Auspiciante: es riguroso y exigente con la rendición de gastos. Tener mucho cuidado con esto.
-	\item Equipo: Juan Perez, suele pedir licencia porque tiene un familiar con una enfermedad. Planificar considerando esto.
-\end{itemize}
-
-\end{consigna} % ELIMINAR \begin{consigna}{red} y \end{consigna}{red} en las secciones que vayan completando para cada entrega parcial.
-
 
 \section{3. Propósito del proyecto}
 \label{sec:proposito}
 
-\begin{consigna}{red} % ELIMINAR \begin{consigna}{red} y \end{consigna}{red} en las secciones que vayan completando para cada entrega parcial.
-
-¿Por qué se hace el proyecto? ¿Qué se quiere lograr? 
-
-Se recomienda que sea solo un párrafo que continúe con la idea de la frase ``el propósito de este proyecto es...'' (omitir la frase, ya que está en el título de la sección).
-\end{consigna}
+Desarrollar un sistema embebido de adquisición de datos que permita a los motociclistas analizar su conducción mediante el registro de variables cinemáticas, ambientales y eléctricas. El objetivo es cubrir la escasez de dispositivos de telemetría accesibles que integren la medición de ángulos de inclinación, el monitoreo térmico y eléctrico del vehículo, y el registro de rutas mediante tecnología \textit{GPS} para la visualización de trayectos en tiempo real e históricos.
 
 \section{4. Alcance del proyecto}
 \label{sec:alcance}
 
-\begin{consigna}{red}
-¿Qué se incluye y que no se incluye en este proyecto?
-
-Se refiere al trabajo que se va a hacer para entregar el producto o resultado especificado. 
-
-Explicitar todo lo quede comprendido dentro del alcance del proyecto. Por ejemplo:
-
 El proyecto incluye:
+
 \begin{itemize}
-	\item Ítem 1.
-	\item Ítem 2.
+	\item Estudio y selección de sensores.
+	\item Diseño y desarrollo del firmware: basado en el microcontrolador \textit{STM32F446RE}, implementando una máquina de estados finita para la gestión del sistema.
+	\item Optimización de recursos del microcontrolador: uso de double buffering para asegurar el registro en la microSD sin pérdida de datos y \textit{Direct Memory Access} (DMA) para reducir el consumo.
+	\item Lógica para la detección de eventos críticos (aceleraciones y frenadas bruscas) y el cálculo de scoring de conducción.
+	\item Desarrollo de una aplicación web que se comunique por \textit{Bluetooth} para visualizar telemetría en tiempo real y mapas de recorrido.
+	\item Pruebas
 		\begin{itemize}
-		\item Subítem 1.
-		\item Subítem 2.
-		\item ...
+		\item Unitarias de los manejadores de los sensores.
+		\item De integración.
+		\item Funcionales.
 		\end{itemize}
-	\item ...
+	\item Documentación técnica del sistema.
+		
 	
 \end{itemize}
 
-Explicitar además todo lo que no quede incluido (``El presente proyecto no incluye...'')
 
-\end{consigna} % ELIMINAR \begin{consigna}{red} y \end{consigna}{red} en las secciones que vayan completando para cada entrega parcial.
-
+El proyecto no incluye:
+\begin{itemize}
+	\item Conectividad a Internet: el sistema se limita a la transmisión local vía \textit{Bluetooth}.
+	\item Diseño y fabricación de un \textit{Printed Circuit Board} (PCB): el prototipo se desarrollará utilizando módulos comerciales cableados.
+	\item El diseño ni la fabricación de un gabinete para el dispositivo.
+\end{itemize}
 
 \section{5. Supuestos del proyecto}
 \label{sec:supuestos}
 
-\begin{consigna}{red} % ELIMINAR \begin{consigna}{red} y \end{consigna}{red} en las secciones que vayan completando para cada entrega parcial.
-``Para el desarrollo del presente proyecto se supone que: ...''
+Para el desarrollo del presente proyecto se supone que:
 
 \begin{itemize}
-	\item Supuesto 1.
-	\item Supuesto 2.
-	\item ...
+	\item El responsable del proyecto, \authorname, cuenta con la dedicación horaria necesaria para cumplir con la planificación y ejecución del mismo.
+	\item Al tratarse de un emprendimiento personal, el responsable del proyecto actuará también como el auspiciante, garantizando la disponibilidad del presupuesto para la adquisición de los componentes de hardware.
+	\item Los componentes electrónicos a utilizar se podrán adquirir en el mercado local o internacional en tiempo y forma para no demorar las etapas del mismo.
+	\item El Director del Trabajo Final, \supname , y el responsable del proyecto acordarán reuniones periódicas para realizar el seguimiento del avance.
+	\item Se dispondrá de una unidad de prueba (motocicleta) que permita la validación funcional del sistema.
+	\item El usuario final contará con un dispositivo móvil para la visualización de la información de telemetría.
+	\item El responsable del proyecto, \authorname, solo se ausentará de manera indefinida en caso de enfrentar una situación de fuerza mayor.
 \end{itemize}
-
-Por ejemplo, se podrían incluir supuestos respecto a disponibilidad de tiempo y recursos humanos y materiales, sobre la factibilidad técnica de distintos aspectos del proyecto, sobre otras cuestiones que sean necesarias para el éxito del proyecto como condiciones macroeconómicas o reglamentarias.
-
-\end{consigna} % ELIMINAR \begin{consigna}{red} y \end{consigna}{red} en las secciones que vayan completando para cada entrega parcial.
 
 \section{6. Product Backlog}
 \label{sec:backlog}
