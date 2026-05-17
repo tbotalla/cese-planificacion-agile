@@ -3,6 +3,10 @@
 %codirector, % Uncomment to add a codirector to the title page
 ]{charter} 
 
+% Para usar tablas con formato tabularx que permiten seguir en la página siguiente.
+\usepackage{ltablex}
+\keepXColumns
+
 
 % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
 \titulo{Sistema de telemetría y detección de eventos para motocicletas} 
@@ -207,9 +211,7 @@ Para el desarrollo del presente proyecto se supone que:
 
 En esta sección se presentan las historias de usuario, agrupadas en épicas y formuladas según el rol que las motiva.
 
-Para estimar el esfuerzo relativo entre historias se decidió utilizar story points.
-
-En esa ponderación se tienen en cuenta la cantidad de trabajo, la complejidad técnica, el riesgo y la incertidumbre asociados a cada historia. Los valores son relativos en escala Fibonacci (1, 2, 3, 5, 8, 13). Como referencia de 1 story point se considera el esfuerzo de integrar un sensor en bus I2C y establecer la comunicación con el microcontrolador.
+Para estimar el esfuerzo relativo entre historias se decidió utilizar story points. En esta ponderación se tienen en cuenta la cantidad de trabajo, la complejidad técnica, el riesgo y la incertidumbre asociados a cada historia. Los valores son relativos en escala Fibonacci (1, 2, 3, 5, 8, 13). Como referencia de 1 story point se considera el esfuerzo de integrar un sensor en bus I2C y establecer la comunicación con el microcontrolador.
 
 \begin{itemize}
   \item \textbf{Épica 1: IMU y barómetro}
@@ -370,6 +372,8 @@ En esa ponderación se tienen en cuenta la cantidad de trabajo, la complejidad t
 
 \section{8. Fases de CRISP-DM}
 
+\textcolor{red}{¿Se puede eliminar esta sección?}
+
 \begin{enumerate}
   \item \textbf{Comprensión del negocio:} objetivo, valor agregado de IA, métricas de éxito.
   \item \textbf{Comprensión de los datos:} tipo, origen, cantidad, calidad.
@@ -382,50 +386,43 @@ En esa ponderación se tienen en cuenta la cantidad de trabajo, la complejidad t
 \section{9. Desglose del trabajo en tareas}
 \label{sec:wbs}
 
-A partir de cada Historia de Usuario (HU) definida en la sección 6, descomponer el trabajo en tareas técnicas concretas, medibles y acotadas en el tiempo.
-
-\begin{itemize}
-\item Seleccionar entre 2 y 3 tareas por cada historia de usuario.
-\item Cada tarea debe estar claramente formulada, ser técnica, accionable y con una estimación horaria entre 2 y 8 horas.
-\item Evitar tareas genéricas (como ''desarrollar funcionalidad´´) o demasiado amplias.
-\item Si una tarea supera las 8 horas, debe dividirse en subtareas.
-\item Indicar la prioridad relativa de cada tarea (Alta, Media o Baja).
-\end{itemize}
-
-\begin{table}[htpb]
-\centering
 \begin{tabularx}{\linewidth}{@{}|X|X|c|c|@{}}
 \hline
 \rowcolor[HTML]{C0C0C0}
 Historia de usuario & Tarea técnica & Estimación & Prioridad \\ \hline
-HU1 & Tarea 1 HU1 & 6 h & Alta \\ \hline
-HU1 & Tarea 2 HU1 & 8 h & Alta \\ \hline
-HU2 & Tarea 1 HU2 & 5 h & Media \\ \hline
-HU2 & Tarea 2 HU2 & 6 h & Alta \\ \hline
-... & ... & ... & ... \\ \hline
+\endfirsthead
+\hline
+\rowcolor[HTML]{C0C0C0}
+Historia de usuario & Tarea técnica & Estimación & Prioridad \\ \hline
+\endhead
+HU1 & Configurar la IMU: rango de medición, frecuencia de muestreo e interfaz I2C & 6 h & Alta \\ \hline
+HU1 & Implementar lectura de registros principales de la IMU por I2C & 6 h & Alta \\ \hline
+HU1 & Generar archivo de prueba en microSD con marcas de tiempo y muestras de la IMU & 8 h & Alta \\ \hline
+HU2 & Configurar el barómetro: modo de operación, tasa de lectura e interfaz I2C & 5 h & Alta \\ \hline
+HU2 & Implementar lectura de presión & 5 h & Alta \\ \hline
+HU2 & Generar archivo de prueba en microSD con marcas de tiempo y muestras del barómetro & 6 h & Alta \\ \hline
+HU3 & Configurar el GPS: velocidad de comunicación y tasa de actualización & 6 h & Alta \\ \hline
+HU3 & Configurar UART del GPS e implementar parser básico de tramas & 8 h & Alta \\ \hline
+HU3 & Registrar latitud, longitud y velocidad en microSD & 6 h & Alta \\ \hline
+HU4 & Configurar sensor de temperatura & 2 h & Alta \\ \hline
+HU4 & Implementar lectura de temperatura & 4 h & Alta \\ \hline
+HU4 & Registrar temperatura en microSD y comparar contra una referencia de banco & 4 h & Alta \\ \hline
+HU5 & Configurar DMA para transferir lecturas de IMU a un buffer en RAM & 8 h & Media \\ \hline
+HU5 & Implementar el buffer de recepción DMA para las lecturas de la IMU & 8 h & Media \\ \hline
+HU6 & Configurar recepción del GPS por UART con DMA hacia buffer en memoria & 8 h & Media \\ \hline
+HU6 & Validar recepción de tramas completas y manejo de tramas incompletas & 6 h & Media \\ \hline
+HU7 & Implementar doble buffer en RAM para muestras de IMU y GPS & 8 h & Alta \\ \hline
+HU7 & Escribir bloques en microSD y validar persistencia del archivo de sesión & 8 h & Alta \\ \hline
+HU8 & Definir formato de telemetría Bluetooth para datos del recorrido en vivo & 6 h & Alta \\ \hline
+HU8 & Implementar vista web de datos en tiempo real & 8 h & Alta \\ \hline
+HU9 & Integrar mapa web y actualizar posición actual con datos GPS válidos & 8 h & Alta \\ \hline
+HU9 & Mostrar estados de desconexión en la interfaz web & 4 h & Alta \\ \hline
+HU10 & Implementar carga de archivo de recorrido en la aplicación web & 6 h & Baja \\ \hline
+HU10 & Visualizar datos cargados en tabla y mapa & 8 h & Media \\ \hline
+HU11 & Definir reglas para marcar aceleraciones y frenadas bruscas en el recorrido & 6 h & Media \\ \hline
+HU11 & Mostrar tramos marcados sobre el mapa desde datos en vivo o archivo cargado & 8 h & Alta \\ \hline
 \end{tabularx}
-\end{table}
 
-\textbf{Criterios para estimar tiempos:}
-\begin{itemize}
-  \item Considerar la complejidad técnica, el nivel de incertidumbre y la experiencia previa.
-  \item Evitar subestimar el esfuerzo: estimar el tiempo realista que llevaría implementar, testear y documentar cada tarea.
-  \item Basar la estimación en la experiencia propia o en referencias de tareas similares.
-\end{itemize}
-
-\textbf{Sobre la prioridad:}
-\begin{itemize}
-  \item Asignar una prioridad relativa (Alta, Media o Baja) según la relevancia funcional de la tarea y su impacto en los entregables.
-  \item Priorizar tareas que estén vinculadas a criterios de aceptación de las HU o que sean necesarias para desbloquear otras.
-  \item Incluir tareas opcionales solo si están bien justificadas.
-\end{itemize}
-
-\textbf{Recomendaciones generales:}
-\begin{itemize}
-  \item -Enfocarse en tareas que surgen directamente de las HU planteadas.
-  \item No es necesario cubrir las 600 horas del proyecto en esta sección: el foco está en el desglose de funcionalidades clave.
-  \item Este trabajo será la base para organizar algunos de los sprints y elaborar el cronograma del proyecto, por lo que debe ser claro y realista.
-\end{itemize}
 
 \section{10. Planificación de Sprints}
 
