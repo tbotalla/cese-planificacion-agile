@@ -205,90 +205,167 @@ Para el desarrollo del presente proyecto se supone que:
 \section{6. Product Backlog}
 \label{sec:backlog}
 
-El Product Backlog debe organizarse en cuatro \textbf{\textit{\'{e}picas}} fundamentales del proyecto. Cada \'{e}pica debe contener al menos dos historias de usuario que describan funcionalidades clave.
+En esta sección se presentan las historias de usuario, agrupadas en épicas y formuladas según el rol que las motiva.
 
-El Product Backlog debe permitir interpretar cómo será el proyecto y su funcionalidad. Se deben indicar claramente las prioridades entre las historias de usuario y si hay alguna opcional.
+Para estimar el esfuerzo relativo entre historias se decidió utilizar story points.
 
-Las historias de usuario deben ser breves, claras y medibles, expresando el rol, la necesidad y el propósito de cada funcionalidad. También deben tener una prioridad definida para facilitar la planificación de los sprints.
-
-Cada historia de usuario debe incluir una ponderación en \textit{Story Points}, un número entero que representa el tama\~no relativo de la historia. El criterio para calcular los Story Points debe indicarse explícitamente.
-
-Las historias deben seguir el formato: ``\textit{Como [rol], quiero [tal cosa] para [tal otra cosa]}''.
-
-Las \'{e}picas deben estructurarse de la siguiente forma:
+En esa ponderación se tienen en cuenta la cantidad de trabajo, la complejidad técnica, el riesgo y la incertidumbre asociados a cada historia. Los valores son relativos en escala Fibonacci (1, 2, 3, 5, 8, 13). Como referencia de 1 story point se considera el esfuerzo de integrar un sensor en bus I2C y establecer la comunicación con el microcontrolador.
 
 \begin{itemize}
-  \item \textbf{\'{E}pica 1}
+  \item \textbf{Épica 1: IMU y barómetro}
+  \begin{itemize}
+    \item HU1: Como responsable del proyecto, quiero un archivo de texto almacenado en una microSD con datos de la IMU para validar el funcionamiento de la misma.
     \begin{itemize}
-      \item HU1
-      \item HU2
+      \item prioridad: alta
+      \item story points: 8
     \end{itemize}
-  \item \textbf{\'{E}pica 2}
+    \item HU2: Como responsable del proyecto, quiero un archivo de texto almacenado en una microSD con datos del barómetro para validar el funcionamiento del mismo.
     \begin{itemize}
-      \item HU3
-      \item HU4
+      \item prioridad: alta
+      \item story points: 5
     \end{itemize}
-  \item \textbf{\'{E}pica 3}
+  \end{itemize}
+  \item \textbf{Épica 2: GPS y temperatura}
+  \begin{itemize}
+    \item HU3: Como responsable del proyecto, quiero un archivo de texto almacenado en una microSD con latitud, longitud y velocidad para validar el GPS.
     \begin{itemize}
-      \item HU5
-      \item HU6
+      \item prioridad: alta
+      \item story points: 8
     \end{itemize}
-  \item \textbf{\'{E}pica 4}
+    \item HU4: Como responsable del proyecto, quiero un archivo de texto almacenado en una microSD con la temperatura, validar el funcionamiento del sensor de temperatura.
     \begin{itemize}
-      \item HU7
-      \item HU8
+      \item prioridad: media
+      \item story points: 5
     \end{itemize}
-\end{itemize}
-
-\textbf{Reglas para definir historias de usuario:}
-\begin{itemize}
-  \item Ser concisas y claras.
-  \item Expresarlas en términos cuantificables y medibles.
-  \item No dejar margen para interpretaciones ambiguas.
-  \item Indicar claramente su prioridad y si son opcionales.
-  \item Considerar regulaciones y normas vigentes.
+  \end{itemize}
+  \item \textbf{Épica 3: DMA y doble buffer en microSD}
+  \begin{itemize}
+    \item HU5: Como responsable del proyecto, quiero obtener las lecturas de la IMU usando DMA hacia un buffer en RAM, para reducir el trabajo de la CPU.
+    \begin{itemize}
+      \item historia opcional
+      \item prioridad: media
+      \item story points: 8
+    \end{itemize}
+    \item HU6: Como responsable del proyecto, quiero obtener las lecturas del GPS usando DMA hacia memoria, para reducir el trabajo de la CPU.
+    \begin{itemize}
+      \item historia opcional
+      \item prioridad: media
+      \item story points: 8
+    \end{itemize}
+    \item HU7: Como responsable del proyecto, quiero grabar en una microSD los datos de la IMU y el GPS usando doble buffer en RAM y escritura hacia la microSD, para asegurar que los datos no se pierdan.
+    \begin{itemize}
+      \item prioridad: alta
+      \item story points: 13
+    \end{itemize}
+  \end{itemize}
+  \item \textbf{Épica 4: aplicación web}
+  \begin{itemize}
+    \item HU8: Como usuario, quiero ver en la web los datos del recorrido en tiempo real, para monitorear el viaje mientras circulo.
+    \begin{itemize}
+      \item prioridad: alta
+      \item story points: 8
+    \end{itemize}
+    \item HU9: Como usuario, quiero ver en la web la posición actual en un mapa, para ubicarme en la ruta.
+    \begin{itemize}
+      \item prioridad: alta
+      \item story points: 8
+    \end{itemize}
+    \item HU10: Como usuario, quiero cargar en la web un archivo de texto exportado de un recorrido y visualizar sus datos, para revisar viajes ya grabados sin conexión en tiempo real con la motocicleta.
+    \begin{itemize}
+      \item prioridad: media
+      \item story points: 5
+    \end{itemize}
+    \item HU11: Como usuario, quiero ver en el mapa los tramos donde hubo aceleraciones o frenadas bruscas, para localizar esas maniobras en el trayecto.
+    \begin{itemize}
+      \item prioridad: alta
+      \item story points: 5
+    \end{itemize}
+  \end{itemize}
 \end{itemize}
 
 \section{7. Criterios de aceptación de historias de usuario}
 \label{sec:criteriosAceptacion}
 
-Los criterios de aceptación deben establecerse para cada historia de usuario, asegurando que se cumplan las condiciones necesarias para que la funcionalidad sea validada correctamente.
-
-Cada historia debe tener criterios medibles, específicos y verificables. Deben permitir validar que se cumple con las necesidades del usuario.
-
-Se estructuran de forma análoga a las \'{e}picas del backlog:
 
 \begin{itemize}
-  \item \textbf{\'{E}pica 1}
+  \item \textbf{Épica 1: IMU y barómetro}
     \begin{itemize}
-      \item Criterios de aceptación HU1
-      \item Criterios de aceptación HU2
+      \item HU1
+        \begin{itemize}
+          \item Se genera un archivo de texto en la microSD con datos de la IMU durante una prueba de al menos 2 minutos.
+          \item Cada registro incluye marca de tiempo y lecturas de acelerómetro y giroscopio.
+          \item El archivo contiene datos consistentes con el movimiento aplicado al sensor.
+        \end{itemize}
+      \item HU2
+        \begin{itemize}
+          \item Se genera un archivo de texto en la microSD con datos del barómetro durante una prueba de al menos 2 minutos.
+          \item Cada registro incluye marca de tiempo y el valor de presión atmosférica.
+          \item El archivo contiene datos consistentes con la presión atmosférica al momento de la prueba.
+        \end{itemize}
     \end{itemize}
-  \item \textbf{\'{E}pica 2}
+  \item \textbf{Épica 2: GPS y temperatura}
     \begin{itemize}
-      \item Criterios de aceptación HU3
-      \item Criterios de aceptación HU4
+      \item HU3
+        \begin{itemize}
+          \item Se genera un archivo de texto en la microSD con latitud, longitud y velocidad durante una prueba de al menos 2 minutos.
+          \item Cada registro incluye marca de tiempo y el valor de la latitud, longitud, y velocidad si corresponde.
+          \item El archivo contiene datos consistentes con la posición al momento de la prueba.
+        \end{itemize}
+      \item HU4
+        \begin{itemize}
+          \item Se genera un archivo de texto en la microSD con la lectura del sensor de temperatura durante una prueba de al menos 2 minutos.
+          \item Cada registro incluye marca de tiempo y valor de temperatura en grados Celsius.
+          \item El archivo contiene datos consistentes con la temperatura al momento de la prueba.
+        \end{itemize}
     \end{itemize}
-  \item \textbf{\'{E}pica 3}
+  \item \textbf{Épica 3: DMA y doble buffer en microSD}
     \begin{itemize}
-      \item Criterios de aceptación HU5
-      \item Criterios de aceptación HU6
+      \item HU5
+        \begin{itemize}
+          \item La IMU se lee usando DMA hacia un buffer en RAM sin que la CPU copie cada dato recibido.
+          \item Durante una prueba de al menos 2 minutos no se detectan errores de transferencia DMA.
+          \item La cantidad de muestras almacenadas en el buffer coincide con la frecuencia de muestreo configurada.
+        \end{itemize}
+      \item HU6
+        \begin{itemize}
+          \item Los datos del GPS se reciben usando DMA hacia memoria sin procesar interrupciones por cada dato recibido.
+          \item Durante una prueba de al menos 2 minutos se reciben tramas completas de GPS.
+          \item Las tramas inválidas se registran como error sin bloquear el sistema.
+        \end{itemize}
+      \item HU7
+        \begin{itemize}
+          \item Se escriben en microSD los datos de IMU y GPS a medida que se generan, usando un esquema de doble buffer en RAM.
+          \item Los datos escritos en la microSD persisten luego de la prueba.
+          \item Durante una prueba de al menos 2 minutos no se pierden muestras, verificando que mientras un buffer se escribe en la microSD el otro continúa recibiendo datos nuevos.
+        \end{itemize}
     \end{itemize}
-  \item \textbf{\'{E}pica 4}
+  \item \textbf{Épica 4: aplicación web}
     \begin{itemize}
-      \item Criterios de aceptación HU7
-      \item Criterios de aceptación HU8
+      \item HU8
+        \begin{itemize}
+          \item La aplicación web muestra datos del recorrido recibidos en tiempo real desde el dispositivo.
+          \item Si se interrumpe la comunicación, la aplicación indica la pérdida de conexión al usuario.
+          \item Los datos mostrados incluyen: altitud, latitud, longitud, velocidad, temperatura, y ángulo de inclinación.
+        \end{itemize}
+      \item HU9
+        \begin{itemize}
+          \item La aplicación web muestra la posición actual en un mapa.
+          \item La posición mostrada se actualiza con cada nuevo dato válido de GPS recibido.
+          \item Si hay un error de lectura del GPS, la aplicación informa que la posición no está disponible.
+        \end{itemize}
+      \item HU10
+        \begin{itemize}
+          \item La aplicación web permite cargar un archivo de texto exportado de un recorrido.
+          \item Los datos del archivo se muestran en pantalla sin requerir conexión con la motocicleta.
+          \item Si el archivo no tiene el formato esperado, la aplicación muestra un mensaje de error.
+        \end{itemize}
+      \item HU11
+        \begin{itemize}
+          \item La aplicación web muestra en el mapa los tramos asociados a aceleraciones o frenadas bruscas.
+          \item Cada tramo marcado queda asociado a una posición y a un instante del recorrido.
+          \item La visualización funciona tanto para datos recibidos en vivo como para un archivo de recorrido cargado.
+        \end{itemize}
     \end{itemize}
-\end{itemize}
-
-\textbf{Reglas para definir criterios de aceptación:}
-\begin{itemize}
-  \item Medibles y verificables.
-  \item Especificar cuándo una historia se considera completada.
-  \item Incluir condiciones específicas.
-  \item No ambiguos.
-  \item Probables de testear funcional o técnicamente.
-  \item Mínimo 3 criterios por HU.
 \end{itemize}
 
 \section{8. Fases de CRISP-DM}
