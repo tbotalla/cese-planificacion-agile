@@ -105,7 +105,7 @@ Se adjunta a esta acta la planificación inicial.
 \section{1. Descripción técnica-conceptual del proyecto a realizar}
 \label{sec:descripcion}
 
-El proyecto consiste en el desarrollo de un un sistema embebido de adquisición, registro y transmisión de telemetría para motocicletas. El dispositivo está diseñado para capturar variables cinemáticas, ambientales y eléctricas, con un enfoque mixto entre el monitoreo de la conducción y la documentación de rutas.
+El proyecto consiste en el desarrollo de un sistema embebido de adquisición, registro y transmisión de telemetría para motocicletas. El dispositivo está diseñado para capturar variables cinemáticas, ambientales y eléctricas, con un enfoque mixto entre el monitoreo de la conducción y la documentación de rutas.
 
 El mismo se encuadra como un emprendimiento personal en el marco del Trabajo Final de la Carrera de Especialización en Sistemas Embebidos (CESE) de la Facultad de Ingeniería de la Universidad de Buenos Aires (FIUBA). La motivación principal surge de la dificultad que enfrentan los motociclistas para acceder a datos precisos sobre su estilo de manejo y el comportamiento dinámico de su vehículo sin recurrir a equipos de alta competición costosos.
 
@@ -116,10 +116,10 @@ Para abordar esta problemática, el proyecto propone combinar la captura de dato
 El sistema centraliza la información de múltiples sensores mediante interfaces de comunicación comunes (\textit{Inter-Integrated Circuit} (I2C), \textit{Serial Peripheral Interface} (SPI), \textit{Universal Asynchronous Receiver-Transmitter} (UART)). Sus funciones principales incluyen:
 
 \begin{itemize}
-    \item Registro de ruta y visualización de viajes: utiliza un módulo \textit{Global Positioning System} (GPS) para obtener posición y velocidad con alta precisión. Estos datos permiten generar mapas de recorrido dinámicos en una aplicación web, permitiendo al usuario analizar su trayectoria y velocidad en cada tramo.
-    \item Detección de eventos críticos: registra caídas, maniobras bruscas (aceleración/frenado) e inclinaciones excesivas. Al detectar un evento, el sistema lo regsitra para su posterior análisis.
+    \item Registro de ruta y visualización de viajes: utiliza un módulo \textit{Global Positioning System} (GPS) para obtener posición y velocidad con alta precisión. Estos datos permiten generar mapas de recorrido dinámicos en una aplicación móvil, permitiendo al usuario analizar su trayectoria y velocidad en cada tramo.
+    \item Detección de eventos críticos: registra caídas, maniobras bruscas (aceleración/frenado) e inclinaciones excesivas. Al detectar un evento, el sistema lo registra para su posterior análisis.
     \item Análisis dinámico: captura datos de una IMU (Inertial Measurement Unit) y un barómetro para estimar ángulos de inclinación, aceleración y altitud.
-    \item Gestión de datos: registra la información en una tarjeta \textit{microSD} mediante un esquema de \textit{double buffering} y transmite vía Bluetooth a una aplicación web.
+    \item Gestión de datos: registra la información en una tarjeta \textit{microSD} mediante un esquema de \textit{double buffering} y transmite vía Bluetooth a una aplicación móvil.
     \item Robustez y autonomía: incluye un \textit{watchdog} para recuperación automática ante fallos y modos de bajo consumo para optimizar el uso de la batería de la moto.
 \end{itemize}
 
@@ -143,7 +143,7 @@ En la figura \ref{fig:diagBloques} se presenta el diagrama en bloques del sistem
 \rowcolor[HTML]{C0C0C0} 
 Rol           & Nombre y Apellido & Organización 	& Puesto 	\\ \hline
 %Auspiciante   &                   &              	&        	\\ \hline
-Cliente       & \clientename      &\empclientename	& Jugaro del CESE       	\\ \hline
+Cliente       & \clientename      &\empclientename	& Jurado del CESE       	\\ \hline
 %Impulsor      &                   &              	&        	\\ \hline
 Responsable   & \authorname       & FIUBA        	& Alumno 	\\ \hline
 %Colaboradores &                   &              	&        	\\ \hline
@@ -170,7 +170,7 @@ El proyecto incluye:
 	\item Optimización de recursos del microcontrolador: uso de \textit{double buffering} para asegurar el registro en la microSD sin pérdida de datos y \textit{Direct Memory Access} (DMA) para reducir el consumo.
 	\item Lógica para la detección de eventos críticos (aceleraciones y frenadas bruscas) y el cálculo de \textit{scoring} de conducción.
 	\pagebreak
-	\item Desarrollo de una aplicación web que se comunique por Bluetooth para visualizar telemetría en tiempo real y mapas de recorrido.
+	\item Desarrollo de una aplicación móvil que se comunique por Bluetooth para visualizar telemetría en tiempo real y mapas de recorrido.
 	\item Pruebas
 		\begin{itemize}
 		\item Unitarias de los manejadores de los sensores.
@@ -204,7 +204,43 @@ Para el desarrollo del presente proyecto se supone que:
 	\item El responsable del proyecto, \authorname, solo se ausentará de manera indefinida en caso de enfrentar una situación de fuerza mayor.
 \end{itemize}
 
-\section{6. Product Backlog}
+\section{6. Requerimientos}
+\label{sec:requerimientos}
+
+Los requerimientos se agrupan por afinidad y se priorizan según su aporte al objetivo del proyecto.
+
+\pagebreak
+
+\begin{enumerate}
+	\item Requerimientos funcionales:
+		\begin{enumerate}
+			\item El sistema debe registrar datos de una IMU en una tarjeta microSD con marca de tiempo. Prioridad: alta.
+			\item El sistema debe registrar datos de presión atmosférica provenientes del barómetro. Prioridad: alta.
+			\item El sistema debe registrar latitud, longitud y velocidad provistas por el módulo GPS. Prioridad: alta.
+			\item El sistema debe registrar la temperatura medida por el sensor seleccionado. Prioridad: media.
+			\item El sistema debe detectar eventos críticos de conducción, tales como aceleraciones, frenadas bruscas e inclinaciones excesivas. Prioridad: alta.
+			\item El sistema debe transmitir por Bluetooth los datos del recorrido hacia una aplicación móvil. Prioridad: alta.
+			\item La aplicación móvil debe mostrar la posición actual en un mapa y los datos principales del recorrido. Prioridad: alta.
+			\item La aplicación móvil debe permitir cargar un archivo exportado de un recorrido para visualizarlo sin conexión con la motocicleta. Prioridad: media.
+		\end{enumerate}
+	\item Requerimientos de firmware y arquitectura embebida:
+		\begin{enumerate}
+			\item El firmware debe ejecutarse sobre un microcontrolador \textit{STM32F446RE}. Prioridad: alta.
+			\item El firmware debe organizar la gestión del sistema mediante una máquina de estados finita. Prioridad: alta.
+			\item El firmware debe implementar un esquema de \textit{double buffering} para evitar pérdida de datos durante la escritura en microSD. Prioridad: alta.
+			\item El firmware debe contemplar el uso de DMA para reducir la carga de CPU en lecturas de IMU y recepción GPS. Prioridad: media.
+			\item El firmware debe incluir un \textit{watchdog} para recuperación automática ante fallos. Prioridad: media.
+		\end{enumerate}
+	\item Requerimientos de prueba y documentación:
+		\begin{enumerate}
+			\item Se deben realizar pruebas unitarias de los manejadores de sensores. Prioridad: alta.
+			\item Se deben realizar pruebas de integración entre sensores, almacenamiento y transmisión Bluetooth. Prioridad: alta.
+			\item Se deben realizar pruebas funcionales en una unidad de prueba. Prioridad: alta.
+			\item Se debe generar documentación técnica del sistema desarrollado. Prioridad: alta.
+		\end{enumerate}
+\end{enumerate}
+
+\section{7. Historias de usuarios (\textit{Product backlog})}
 \label{sec:backlog}
 
 En esta sección se presentan las historias de usuario, agrupadas en épicas y formuladas según el rol que las motiva.
@@ -258,19 +294,19 @@ Para estimar el esfuerzo relativo entre historias se decidió utilizar story poi
       \item Story points: 13
     \end{itemize}
   \end{itemize}
-  \item \textbf{Épica 4: aplicación web}
+  \item \textbf{Épica 4: aplicación móvil}
   \begin{itemize}
-    \item HU8: como usuario, quiero ver en la web los datos del recorrido en tiempo real, para monitorear el viaje mientras circulo.
+    \item HU8: como usuario, quiero ver en la aplicación móvil los datos del recorrido en tiempo real, para monitorear el viaje mientras circulo.
     \begin{itemize}
       \item Prioridad: alta
       \item Story points: 8
     \end{itemize}
-    \item HU9: como usuario, quiero ver en la web la posición actual en un mapa, para ubicarme en la ruta.
+    \item HU9: como usuario, quiero ver en la aplicación móvil la posición actual en un mapa, para ubicarme en la ruta.
     \begin{itemize}
       \item Prioridad: alta
       \item Story points: 8
     \end{itemize}
-    \item HU10: como usuario, quiero cargar en la web un archivo de texto exportado de un recorrido y visualizar sus datos, para revisar viajes ya grabados sin conexión en tiempo real con la motocicleta.
+    \item HU10: como usuario, quiero cargar en la aplicación móvil un archivo de texto exportado de un recorrido y visualizar sus datos, para revisar viajes ya grabados sin conexión en tiempo real con la motocicleta.
     \begin{itemize}
       \item Prioridad: media
       \item Story points: 5
@@ -283,7 +319,7 @@ Para estimar el esfuerzo relativo entre historias se decidió utilizar story poi
   \end{itemize}
 \end{itemize}
 
-\section{7. Criterios de aceptación de historias de usuario}
+\subsection*{Criterios de aceptación de historias de usuario}
 \label{sec:criteriosAceptacion}
 
 
@@ -339,47 +375,48 @@ Para estimar el esfuerzo relativo entre historias se decidió utilizar story poi
           \item Durante una prueba de al menos 2 minutos no se pierden muestras, verificando que mientras un buffer se escribe en la microSD el otro continúa recibiendo datos nuevos.
         \end{itemize}
     \end{itemize}
-  \item \textbf{Épica 4: aplicación web}
+  \item \textbf{Épica 4: aplicación móvil}
     \begin{itemize}
       \item HU8
         \begin{itemize}
-          \item La aplicación web muestra datos del recorrido recibidos en tiempo real desde el dispositivo.
+          \item La aplicación móvil muestra datos del recorrido recibidos en tiempo real desde el dispositivo.
           \item Si se interrumpe la comunicación, la aplicación indica la pérdida de conexión al usuario.
           \item Los datos mostrados incluyen: altitud, latitud, longitud, velocidad, temperatura, y ángulo de inclinación.
         \end{itemize}
       \item HU9
         \begin{itemize}
-          \item La aplicación web muestra la posición actual en un mapa.
+          \item La aplicación móvil muestra la posición actual en un mapa.
           \item La posición mostrada se actualiza con cada nuevo dato válido de GPS recibido.
           \item Si hay un error de lectura del GPS, la aplicación informa que la posición no está disponible.
         \end{itemize}
       \item HU10
         \begin{itemize}
-          \item La aplicación web permite cargar un archivo de texto exportado de un recorrido.
+          \item La aplicación móvil permite cargar un archivo de texto exportado de un recorrido.
           \item Los datos del archivo se muestran en pantalla sin requerir conexión con la motocicleta.
           \item Si el archivo no tiene el formato esperado, la aplicación muestra un mensaje de error.
         \end{itemize}
       \item HU11
         \begin{itemize}
-          \item La aplicación web muestra en el mapa los tramos asociados a aceleraciones o frenadas bruscas.
+          \item La aplicación móvil muestra en el mapa los tramos asociados a aceleraciones o frenadas bruscas.
           \item Cada tramo marcado queda asociado a una posición y a un instante del recorrido.
           \item La visualización funciona tanto para datos recibidos en vivo como para un archivo de recorrido cargado.
         \end{itemize}
     \end{itemize}
 \end{itemize}
 
-\section{8. Fases de CRISP-DM}
+\section{8. Entregables principales del proyecto}
+\label{sec:entregables}
 
-\textcolor{red}{¿Se puede eliminar esta sección?}
+Los entregables principales del proyecto son:
 
-\begin{enumerate}
-  \item \textbf{Comprensión del negocio:} objetivo, valor agregado de IA, métricas de éxito.
-  \item \textbf{Comprensión de los datos:} tipo, origen, cantidad, calidad.
-  \item \textbf{Preparación de los datos:} características clave, transformaciones necesarias.
-  \item \textbf{Modelado:} tipo de problema, algoritmos posibles.
-  \item \textbf{Evaluación del modelo:} métricas de rendimiento.
-  \item \textbf{Despliegue del modelo (opcional):} tipo de despliegue y herramientas.
-\end{enumerate}
+\begin{itemize}
+	\item Código fuente documentado del sistema embebido para el microcontrolador \textit{STM32F446RE}.
+	\item Aplicación móvil para visualización de telemetría en tiempo real y recorridos almacenados.
+    \item Documentación técnica del sistema.
+    \item Informe de pruebas y validaciones.
+    \item Prototipo funcional (hardware).
+	\item Memoria del trabajo final.
+\end{itemize}
 
 \section{9. Desglose del trabajo en tareas}
 \label{sec:wbs}
@@ -412,152 +449,107 @@ HU6 & Validar recepción de tramas completas y manejo de tramas incompletas & 6 
 HU7 & Implementar doble buffer en RAM para muestras de IMU y GPS & 8 h & Alta \\ \hline
 HU7 & Escribir bloques en microSD y validar persistencia del archivo de sesión & 8 h & Alta \\ \hline
 HU8 & Definir formato de telemetría Bluetooth para datos del recorrido en vivo & 6 h & Alta \\ \hline
-HU8 & Implementar vista web de datos en tiempo real & 8 h & Alta \\ \hline
-HU9 & Integrar mapa web y actualizar posición actual con datos GPS válidos & 8 h & Alta \\ \hline
-HU9 & Mostrar estados de desconexión en la interfaz web & 4 h & Alta \\ \hline
-HU10 & Implementar carga de archivo de recorrido en la aplicación web & 6 h & Baja \\ \hline
+HU8 & Implementar vista de datos en tiempo real en la aplicación móvil & 8 h & Alta \\ \hline
+HU9 & Integrar mapa en la aplicación móvil y actualizar posición actual con datos GPS válidos & 8 h & Alta \\ \hline
+HU9 & Mostrar estados de desconexión en la interfaz de la aplicación móvil & 4 h & Alta \\ \hline
+HU10 & Implementar carga de archivo de recorrido en la aplicación móvil & 6 h & Baja \\ \hline
 HU10 & Visualizar datos cargados en tabla y mapa & 8 h & Media \\ \hline
 HU11 & Definir reglas para marcar aceleraciones y frenadas bruscas en el recorrido & 6 h & Media \\ \hline
 HU11 & Mostrar tramos marcados sobre el mapa desde datos en vivo o archivo cargado & 8 h & Alta \\ \hline
 \end{tabularx}
 
 
-\section{10. Planificación de Sprints}
+\section{10. Diagrama de Activity On Node}
+\label{sec:AoN}
 
-Organizar las tareas técnicas del proyecto en sprints de trabajo que permitan distribuir de forma equilibrada la carga horaria total, estimada en 600 horas.
+\begin{consigna}{red}
+Armar el AoN a partir del WBS definido en la etapa anterior.
 
-\textbf{Consigna:}
+Una herramienta simple para desarrollar los diagramas es el Draw.io (\url{https://app.diagrams.net/}).
+\href{https://app.diagrams.net}{Draw.io}
+
+Indicar claramente en qué unidades están expresados los tiempos.
+De ser necesario indicar los caminos semicríticos y analizar sus tiempos mediante un cuadro.
+Es recomendable usar colores y un cuadro indicativo describiendo qué representa cada color.
+\end{consigna}
+
+\section{11. Diagrama de Gantt}
+\label{sec:gantt}
+
+\begin{consigna}{red}
+Existen muchos programas y recursos \textit{online} para hacer diagramas de Gantt, entre los cuales destacamos:
+
 \begin{itemize}
-  \item Completar una tabla que relacione sprints con HU y tareas técnicas correspondientes.
-  \item Incluir estimación en horas para cada tarea.
-  \item Indicar responsable y porcentaje de avance estimado o completado.
-  \item Contemplar también tareas de planificación, documentación, redacción de memoria y preparación de defensa.
+\item Planner.
+\item GanttProject.
+\item Trello + \textit{plugins}. En el siguiente link hay un tutorial oficial: \url{https://blog.trello.com/es/diagrama-de-gantt-de-un-proyecto}
+\item Creately, herramienta online colaborativa: \url{https://creately.com/diagram/example/ieb3p3ml/LaTeX}
+\item Se puede hacer en LaTeX con el paquete \textit{pgfgantt}: \url{http://ctan.dcc.uchile.cl/graphics/pgf/contrib/pgfgantt/pgfgantt.pdf}
 \end{itemize}
 
-\textbf{Conceptos clave:}
-\begin{itemize}
-  \item Una \'{e}pica es una unidad funcional amplia; una historia de usuario es una funcionalidad concreta; un sprint es una unidad de tiempo donde se ejecutan tareas.
-  \item Las tareas son el nivel más desagregado: permiten estimar tiempos, asignar responsables y monitorear progreso.
-\end{itemize}
+Pegar acá una captura de pantalla del diagrama de Gantt, cuidando que la letra sea suficientemente grande como para ser legible.
+Si el diagrama queda demasiado ancho, se puede pegar primero la tabla del Gantt y luego la parte del diagrama de barras.
 
-\textbf{Duración sugerida:}
-\begin{itemize}
-  \item Para un proyecto de 600 h, se recomienda planificar entre 10 y 12 sprints de aproximadamente 2 semanas cada uno.
-  \item Asignar entre 45 y 50 horas efectivas por sprint a tareas técnicas.
-  \item Reservar 100 a 120 h para actividades no técnicas (planificación, escritura, reuniones, defensa).
-\end{itemize}
+Configurar el software para que en la parte de la tabla muestre los códigos del EDT (WBS).
+Configurar el software para que al lado de cada barra muestre el nombre de cada tarea.
+Revisar que la fecha de finalización coincida con lo indicado en el acta constitutiva.
+\end{consigna}
 
-\textbf{Importante:}
-\begin{itemize}
-  \item En proyectos individuales, el responsable suele ser el propio autor.
-  \item Aun así, desagregar tareas facilita el seguimiento y mejora continua.
-\end{itemize}
+\section{12. Presupuesto detallado del proyecto}
+\label{sec:presupuesto}
 
-\textbf{Conversión opcional de Story Points a horas:}
-\begin{itemize}
-  \item 1 SP \(\approx\) 2 h como referencia flexible.
-  \item Tener en cuenta aproximaciones tipo Fibonacci.
-\end{itemize}
+\begin{consigna}{red}
+Completar el presupuesto detallado del proyecto, considerando costos directos e indirectos.
+Incluir la moneda utilizada y, si corresponde, la tasa de conversión respecto a moneda local en una fecha dada.
+\end{consigna}
 
 \begin{table}[htpb]
 \centering
-\caption{Formato sugerido}
-\begin{tabularx}{\linewidth}{@{}|l|l|X|c|l|c|@{}}
+\begin{tabularx}{\linewidth}{@{}|X|c|r|r|@{}}
 \hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}COSTOS DIRECTOS} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+Descripción &
+  \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
+  \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
+  \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
+Componentes electrónicos y módulos comerciales &
+  \multicolumn{1}{c|}{} &
+  \multicolumn{1}{c|}{} &
+  \multicolumn{1}{c|}{} \\ \hline
+Materiales de conexión, montaje y prototipado &
+  \multicolumn{1}{c|}{} &
+  \multicolumn{1}{c|}{} &
+  \multicolumn{1}{c|}{} \\ \hline
+Elementos para pruebas en banco y campo &
+   &
+   &
+   \\ \hline
+\multicolumn{3}{|c|}{SUBTOTAL} &
+  \multicolumn{1}{c|}{} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}COSTOS INDIRECTOS} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+Descripción &
+  \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
+  \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
+  \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
+Horas de ingeniería, documentación y validación &
+   &
+   &
+   \\ \hline
+Herramientas, insumos generales y contingencias &
+   &
+   &
+   \\ \hline
+\multicolumn{3}{|c|}{SUBTOTAL} &
+  \multicolumn{1}{c|}{} \\ \hline
 \rowcolor[HTML]{C0C0C0}
-Sprint & HU o fase & Tarea & Horas / SP & Responsable & \% Completado \\ \hline
-Sprint 0 & Planificación & Definir alcance y cronograma & 10 h & Alumno & 100\% \\ \hline
-Sprint 0 & Planificación & Reunión con el tutor/cliente & 5 h & Alumno & 50\% \\ \hline
-Sprint 0 & Planificación & Ajuste de los entregables & 6 h & Alumno & 25\% \\ \hline
-Sprint 1 & HU1 & Tarea 1 HU1 & 6 h / 3 SP & Alumno & 0\% \\ \hline
-Sprint 1 & HU1 & Tarea 2 HU1 & 10 h / 5 SP & Alumno & 0\% \\ \hline
-Sprint 2 & HU2 & Tarea 1 HU2 & 7 h / 5 SP & Alumno & 0\% \\ \hline
-... & ... & ... & ... & ... & ... \\ \hline
-Sprint 5 & Escritura & Redacción memoria & 50 h / 34 SP & Alumno & 0\% \\ \hline
-Sprint 6 & Defensa & Preparación de la exposición & 20 h / 13 SP & Alumno & 0\% \\ \hline
-\end{tabularx}
+\multicolumn{3}{|c|}{TOTAL} &
+   \\ \hline
+\end{tabularx}%
 \end{table}
-
-\textbf{Recomendaciones:}
-\begin{itemize}
-  \item Verificar que la carga horaria por sprint sea equilibrada.
-  \item Usar sprints de 1 a 3 semanas, acordes al cronograma general.
-  \item Actualizar el \% completado durante el seguimiento del proyecto.
-  \item Considerar un sprint final exclusivo para pruebas, revisión y ajustes antes de la defensa.
-\end{itemize}
-
-
-\section{11. Diagrama de Gantt (sprints)}
-\label{sec:gantt}
-
-Visualizar en un diagrama de Gantt la planificación temporal del proyecto, tomando como base los sprints definidos en la sección anterior. Debe contemplar todas las horas del proyecto.
-
-Consigna:
-
-\begin{itemize}
-
-\item Elaborar un diagrama de Gantt que muestre la secuencia temporal de los sprints.
-
-\item Cada fila debe representar un sprint (con su número o nombre), y el eje horizontal debe indicar el tiempo (en semanas o fechas concretas).
-
-\item Las tareas técnicas derivadas de HU deben diferenciarse visualmente (por ejemplo, con un color distinto) de las tareas no técnicas (planificación, redacción, defensa).
-
-\item Incluir todas las tareas estimadas en cada sprint.
-\end{itemize}
-
-Recomendaciones para el Gantt:
-
-\begin{itemize}
-
-	\item Podés usar herramientas gratuitas como TeamGantt, ClickUp, GanttProject, [Google Sheets], [Trello + Planyway], entre otras.
-	\item Ordená los sprints de forma cronológica, comenzando con Sprint 0 (planificación) y finalizando con el sprint de defensa.
-	\item Asegurate de reflejar la duración realista de cada sprint según tu disponibilidad y el cronograma general del posgrado.
-	\item Incluí hitos importantes: reuniones, entregas parciales, defensa.
-\end{itemize}
-
-
-Incluir una imagen legible del diagrama de Gantt. Si es muy ancho, presentar primero la tabla y luego el gráfico de barras.
-
-
-
-\section{12. Gobernanza de datos}
-\label{sec:gobernanza}
-
-En esta sección se debe analizar de manera integral el marco normativo y ético asociado al uso de los datos y al desarrollo de soluciones basadas en inteligencia artificial.
-
-El análisis se divide en dos partes:
-
-\begin{itemize}
-  \item Cumplimiento normativo.
-  \item Ética en el uso de inteligencia artificial.
-\end{itemize}
-
-\subsection{Cumplimiento normativo}
-Este análisis es clave para garantizar el cumplimiento normativo y evitar conflictos legales durante el desarrollo y publicación del proyecto.
-
-En esta subsección se debe identificar si los datos utilizados en el proyecto están sujetos a normativas de protección de datos y privacidad, y en qué condiciones pueden emplearse.
-
-Aspectos a considerar:
-
-\begin{itemize}
-  \item Determinar si los datos están regulados por normativas como el GDPR, la Ley 25.326 de Protección de Datos Personales (Argentina), la HIPAA u otras, según la jurisdicción o la temática del proyecto.
-  \item Aclarar si las fuentes de datos son propias, de acceso público o licenciadas. En este último caso, explicitar la licencia correspondiente y sus condiciones de uso. Realizar este mismo análisis para las herramientas y, en caso de corresponder, para los modelos preentrenados a emplear.
-  \item Analizar la viabilidad legal del proyecto, considerando los mecanismos necesarios para garantizar el cumplimiento normativo y la trazabilidad de los datos.
-\end{itemize}
-
-\subsection{Ética en el uso de inteligencia artificial}
-
-En esta subsección se debe reflexionar sobre los aspectos éticos vinculados al uso de datos y algoritmos de inteligencia artificial. Se espera una evaluación de la integridad del sistema y su impacto social.
-
-Aspectos a considerar:
-
-\begin{itemize}
-	\item Identificar posibles sesgos en los datos o modelos (ideológicos, culturales, de género, geográficos, etc.) y analizar sus consecuencias (por ejemplo: discriminación, manipulación, pérdida de privacidad o desinformación).
-	\item Analizar los posibles riesgos en términos de impacto social del uso indebido de la solución a desarrollar.
-	\item En caso de corresponder, proponer medidas de mitigación y mecanismos de confianza (auditorías, documentación, trazabilidad, revisión humana, etc.).
-	\item Finalmente, elaborar una reflexión general sobre la ética del proyecto, considerando tanto la equidad y transparencia del sistema como su impacto potencial en la sociedad.
-
-\end{itemize}
 
 
 \section{13. Gestión de riesgos}
@@ -593,7 +585,7 @@ Riesgo 3:
 
 b) Tabla de gestión de riesgos:      (El RPN se calcula como RPN=SxO)
 
-\begin{table}[htpb]
+\begin{table}[H]
 \centering
 \begin{tabularx}{\linewidth}{@{}|X|c|c|c|c|c|c|@{}}
 \hline
@@ -606,6 +598,9 @@ Riesgo & S & O & RPN & S* & O* & RPN* \\ \hline
        &   &   &     &    &    &      \\ \hline
 \end{tabularx}%
 \end{table}
+
+\FloatBarrier
+\pagebreak
 
 Criterio adoptado: 
 
@@ -630,91 +625,76 @@ Riesgo 3: plan de mitigación (si por el RPN fuera necesario elaborar un plan de
 
 \end{consigna}
 
-\section{14. Sprint Review}
-\label{sec:sprint_review}
+\section{14. Gestión de la calidad}
+\label{sec:calidad}
 
-La revisión de sprint (\emph{Sprint Review}) es una práctica fundamental en metodologías ágiles. Consiste en revisar y evaluar lo que se ha completado al finalizar un sprint. En esta instancia, se presentan los avances y se verifica si las funcionalidades cumplen con los criterios de aceptación establecidos. También se identifican entregables parciales y se consideran ajustes si es necesario.
-
-Aunque el proyecto aún se encuentre en etapa de planificación, esta sección permite proyectar cómo se evaluarán las funcionalidades más importantes del backlog. Esta mirada anticipada favorece la planificación enfocada en valor y permite reflexionar sobre posibles obstáculos.
-
-\textbf{Objetivo:} anticipar cómo se evaluará el avance del proyecto a medida que se desarrollen las funcionalidades, utilizando como base al menos cuatro historias de usuario del \emph{Product Backlog}.
-
-
-Seleccionar al menos 4 HU del Product Backlog. Para cada una, completar la siguiente tabla de revisión proyectada:
-
-\textbf{Formato sugerido:}
-\begin{table}[htpb]
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{|>{\raggedright\arraybackslash}m{2.4cm}|
-                >{\raggedright\arraybackslash}m{2.3cm}|
-                >{\raggedright\arraybackslash}m{3cm}|
-                >{\raggedright\arraybackslash}m{3cm}|
-                >{\raggedright\arraybackslash}m{3cm}|}
-\hline
-\rowcolor[HTML]{CCCCCC}
-\textbf{HU seleccionada} & \textbf{Tareas asociadas} & \textbf{Entregable esperado} & \textbf{¿Cómo sabrás que está cumplida?} & \textbf{Observaciones o riesgos} \\
-\hline
-                         & Tarea 1 &                             &                                           &                                     \\ \cline{2-2}
-\multirow{-2}{=}{HU1}    & Tarea 2 & \multirow{-2}{=}{Módulo funcional} & \multirow{-2}{=}{Cumple criterios de aceptación definidos} & \multirow{-2}{=}{Falta validar con el tutor} \\
-\hline
-                         & Tarea 1 &                             &                                           &                                     \\ \cline{2-2}
-\multirow{-2}{=}{HU3}    & Tarea 2 & \multirow{-2}{=}{Reporte generado} & \multirow{-2}{=}{Exportación disponible y clara} & \multirow{-2}{=}{Requiere datos reales} \\
-\hline
-                         & Tarea 1 &                             &                                           &                                     \\ \cline{2-2}
-\multirow{-2}{=}{HU5}    & Tarea 2 & \multirow{-2}{=}{Panel de gestión} & \multirow{-2}{=}{Roles diferenciados operativos} & \multirow{-2}{=}{Riesgo en integración} \\
-\hline
-                         & Tarea 1 &                             &                                           &                                     \\ \cline{2-2}
-\multirow{-2}{=}{HU7}    & Tarea 2 & \multirow{-2}{=}{Informe trimestral} & \multirow{-2}{=}{PDF con gráficos y evolución} & \multirow{-2}{=}{Puede faltar tiempo para ajustes} \\
-\hline
-\end{tabular}
-\end{table}
-
-\section{15. Sprint Retrospective}    
-\label{sec:sprint_retro}
-
-La retrospectiva de sprint es una práctica orientada a la mejora continua. Al finalizar un sprint, el equipo (o el alumno, si trabaja de forma individual) reflexiona sobre lo que funcionó bien, lo que puede mejorarse y qué acciones concretas pueden implementarse para trabajar mejor en el futuro.
-
-Durante la cursada se propuso el uso de la \textbf{Estrella de la Retrospectiva}, que organiza la reflexión en torno a cinco ejes:
+Las acciones de verificación y validación se definen a partir de los requerimientos principales y de los criterios de aceptación de las historias de usuario.
 
 \begin{itemize}
-\item  ¿Qué hacer más?
-\item  ¿Qué hacer menos?
-\item  ¿Qué mantener?
-\item  ¿Qué empezar a hacer?
-\item  ¿Qué dejar de hacer?
+\item Req \#1: registro de datos de la IMU en microSD.
+	\begin{itemize}
+	\item Verificación: ejecutar una prueba de al menos 2 minutos y confirmar que el archivo generado incluye marca de tiempo, acelerómetro y giroscopio.
+	\item Validación: revisar con el director que los datos registrados sean consistentes con el movimiento aplicado al sensor.
+	\end{itemize}
+\item Req \#2: registro de datos del barómetro.
+	\begin{itemize}
+	\item Verificación: generar un archivo de prueba en microSD y confirmar que cada registro incluya marca de tiempo y presión atmosférica.
+	\item Validación: comparar las lecturas con condiciones ambientales esperadas durante la prueba.
+	\end{itemize}
+\item Req \#3: registro de posición y velocidad GPS.
+	\begin{itemize}
+	\item Verificación: recibir tramas GPS válidas durante una prueba de al menos 2 minutos y registrar latitud, longitud y velocidad.
+	\item Validación: comprobar que la posición registrada sea coherente con la ubicación de prueba.
+	\end{itemize}
+\item Req \#4: registro de temperatura.
+	\begin{itemize}
+	\item Verificación: registrar temperatura en microSD con marca de tiempo y unidades en grados Celsius.
+	\item Validación: comparar la lectura contra una referencia de banco.
+	\end{itemize}
+\item Req \#5: uso de DMA para lecturas de IMU.
+	\begin{itemize}
+	\item Verificación: confirmar que la IMU se lea usando DMA hacia un buffer en RAM sin copia manual de cada muestra por CPU.
+	\item Validación: verificar que durante una prueba no se detecten errores de transferencia y que la cantidad de muestras coincida con la frecuencia configurada.
+	\end{itemize}
+\item Req \#6: recepción GPS con DMA.
+	\begin{itemize}
+	\item Verificación: confirmar que las tramas GPS se reciban por UART con DMA hacia memoria.
+	\item Validación: evaluar recepción de tramas completas y manejo de tramas inválidas sin bloqueo del sistema.
+	\end{itemize}
+\item Req \#7: escritura en microSD con doble buffer.
+	\begin{itemize}
+	\item Verificación: comprobar que mientras un buffer se escribe en microSD el otro continúe recibiendo datos nuevos.
+	\item Validación: ejecutar una prueba de al menos 2 minutos sin pérdida de muestras y confirmar persistencia del archivo.
+	\end{itemize}
+\item Req \#8: visualización móvil de telemetría en tiempo real.
+	\begin{itemize}
+	\item Verificación: confirmar que la aplicación muestre altitud, latitud, longitud, velocidad, temperatura y ángulo de inclinación.
+	\item Validación: verificar que ante una interrupción de comunicación se informe la pérdida de conexión al usuario.
+	\end{itemize}
+\item Req \#9: visualización de posición actual en mapa.
+	\begin{itemize}
+	\item Verificación: confirmar que la posición se actualice con cada dato GPS válido.
+	\item Validación: comprobar que ante errores de lectura se informe que la posición no está disponible.
+	\end{itemize}
+\item Req \#10: carga de recorridos almacenados.
+	\begin{itemize}
+	\item Verificación: cargar un archivo exportado y mostrar sus datos sin conexión con la motocicleta.
+	\item Validación: comprobar que ante un archivo con formato inválido la aplicación muestre un mensaje de error.
+	\end{itemize}
 \end{itemize}
 
-Aun en una etapa temprana, esta herramienta permite que el alumno planifique su forma de trabajar, identifique anticipadamente posibles dificultades y diseñe estrategias de organización personal.
+\section{15. Procesos de cierre}    
+\label{sec:cierre}
 
-\textbf{Objetivo:} reflexionar sobre las condiciones iniciales del proyecto, identificando fortalezas, posibles dificultades y estrategias de mejora, incluso antes del inicio del desarrollo.
+\begin{consigna}{red}
+Establecer las pautas de trabajo para realizar una reunión final de evaluación del proyecto, contemplando:
 
-
-Completar la siguiente tabla tomando como referencia los cinco ejes de la Estrella de la Retrospectiva (\emph{Starfish} o estrella de mar). Esta instancia te ayudará a definir buenas prácticas desde el inicio y prepararte para enfrentar el trabajo de forma organizada y flexible. Se deberá completar la tabla al menos para 3 sprints técnicos y 1 no técnico.
-
-\textbf{Formato sugerido:}
-
-\begin{table}[htpb]
-\renewcommand{\arraystretch}{1.4}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{1.8cm}|
-                >{\raggedright\arraybackslash}p{2.3cm}|
-                >{\raggedright\arraybackslash}p{2.3cm}|
-                >{\raggedright\arraybackslash}p{2.3cm}|
-                >{\raggedright\arraybackslash}p{2.3cm}|
-                >{\raggedright\arraybackslash}p{2.3cm}|}
-\hline
-\rowcolor[HTML]{CCCCCC} 
-\textbf{Sprint tipo y N°} & \textbf{¿Qué hacer más?} & \textbf{¿Qué hacer menos?} & \textbf{¿Qué mantener?} & \textbf{¿Qué empezar a hacer?} & \textbf{¿Qué dejar de hacer?} \\
-\hline
-Sprint técnico - 1 & Validaciones continuas con el alumno & Cambios sin versión registrada & Pruebas con datos simulados & Documentar cambios propuestos & Ajustes sin análisis de impacto \\
-\hline
-Sprint técnico - 2 & Verificar configuraciones en múltiples escenarios & Modificar parámetros sin guardar historial & Perfiles reutilizables & Usar logs para configuración & Repetir pruebas manuales innecesarias \\
-\hline
-Sprint técnico - 8 & Comparar correlaciones con casos previos & Cambiar parámetros sin justificar & Revisión cruzada de métricas & Anotar configuraciones usadas & Trabajar sin respaldo de datos \\
-\hline
-Sprint no técnico - 12 (por ej.: ``Defensa'') & Ensayos orales con feedback & Cambiar contenidos en la memoria & Material visual claro & Dividir la presentación por bloques & Agregar gráficos difíciles de explicar \\
-\hline
-\end{tabular}
-\end{table}
+\begin{itemize}
+	\item Pautas para analizar si se respetó el plan de proyecto original, indicando responsable y procedimiento.
+	\item Identificación de técnicas y procedimientos útiles e inútiles, problemas encontrados y soluciones aplicadas.
+	\item Organización del acto de agradecimiento a los interesados, equipo de trabajo y colaboradores, indicando responsable y financiamiento.
+\end{itemize}
+\end{consigna}
 
 
 
