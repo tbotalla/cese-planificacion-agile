@@ -317,6 +317,14 @@ Para estimar el esfuerzo relativo entre historias se decidió utilizar story poi
       \item Story points: 5
     \end{itemize}
   \end{itemize}
+  \item \textbf{Épica 5: investigación y documentación}
+  \begin{itemize}
+    \item HU12: como responsable del proyecto, quiero investigar las decisiones técnicas y documentar el diseño, la validación y los resultados, para asegurar la trazabilidad del desarrollo y facilitar la revisión del trabajo final.
+    \begin{itemize}
+      \item Prioridad: alta
+      \item Story points: 13
+    \end{itemize}
+  \end{itemize}
 \end{itemize}
 
 \subsection*{Criterios de aceptación de historias de usuario}
@@ -402,6 +410,15 @@ Para estimar el esfuerzo relativo entre historias se decidió utilizar story poi
           \item La visualización funciona tanto para datos recibidos en vivo como para un archivo de recorrido cargado.
         \end{itemize}
     \end{itemize}
+  \item \textbf{Épica 5: investigación y documentación}
+    \begin{itemize}
+      \item HU12
+        \begin{itemize}
+          \item Se registra la selección de componentes, sensores, protocolos y librerías utilizadas en el proyecto.
+          \item Se documentan las decisiones principales de diseño del firmware y del formato de datos.
+          \item Se incluyen resultados de validación en banco y conclusiones técnicas en la documentación del trabajo final.
+        \end{itemize}
+    \end{itemize}
 \end{itemize}
 
 \section{8. Entregables principales del proyecto}
@@ -421,57 +438,92 @@ Los entregables principales del proyecto son:
 \section{9. Desglose del trabajo en tareas}
 \label{sec:wbs}
 
-\begin{tabularx}{\linewidth}{@{}|X|X|c|c|@{}}
-\hline
-\rowcolor[HTML]{C0C0C0}
-Historia de usuario & Tarea técnica & Estimación & Prioridad \\ \hline
-\endfirsthead
-\hline
-\rowcolor[HTML]{C0C0C0}
-Historia de usuario & Tarea técnica & Estimación & Prioridad \\ \hline
-\endhead
-HU1 & Configurar la IMU: rango de medición, frecuencia de muestreo e interfaz I2C & 6 h & Alta \\ \hline
-HU1 & Implementar lectura de registros principales de la IMU por I2C & 6 h & Alta \\ \hline
-HU1 & Generar archivo de prueba en microSD con marcas de tiempo y muestras de la IMU & 8 h & Alta \\ \hline
-HU2 & Configurar el barómetro: modo de operación, tasa de lectura e interfaz I2C & 5 h & Alta \\ \hline
-HU2 & Implementar lectura de presión & 5 h & Alta \\ \hline
-HU2 & Generar archivo de prueba en microSD con marcas de tiempo y muestras del barómetro & 6 h & Alta \\ \hline
-HU3 & Configurar el GPS: velocidad de comunicación y tasa de actualización & 6 h & Alta \\ \hline
-HU3 & Configurar UART del GPS e implementar parser básico de tramas & 8 h & Alta \\ \hline
-HU3 & Registrar latitud, longitud y velocidad en microSD & 6 h & Alta \\ \hline
-HU4 & Configurar sensor de temperatura & 2 h & Alta \\ \hline
-HU4 & Implementar lectura de temperatura & 4 h & Alta \\ \hline
-HU4 & Registrar temperatura en microSD y comparar contra una referencia de banco & 4 h & Alta \\ \hline
-HU5 & Configurar DMA para transferir lecturas de IMU a un buffer en RAM & 8 h & Media \\ \hline
-HU5 & Implementar el buffer de recepción DMA para las lecturas de la IMU & 8 h & Media \\ \hline
-HU6 & Configurar recepción del GPS por UART con DMA hacia buffer en memoria & 8 h & Media \\ \hline
-HU6 & Validar recepción de tramas completas y manejo de tramas incompletas & 6 h & Media \\ \hline
-HU7 & Implementar doble buffer en RAM para muestras de IMU y GPS & 8 h & Alta \\ \hline
-HU7 & Escribir bloques en microSD y validar persistencia del archivo de sesión & 8 h & Alta \\ \hline
-HU8 & Definir formato de telemetría Bluetooth para datos del recorrido en vivo & 6 h & Alta \\ \hline
-HU8 & Implementar vista de datos en tiempo real en la aplicación móvil & 8 h & Alta \\ \hline
-HU9 & Integrar mapa en la aplicación móvil y actualizar posición actual con datos GPS válidos & 8 h & Alta \\ \hline
-HU9 & Mostrar estados de desconexión en la interfaz de la aplicación móvil & 4 h & Alta \\ \hline
-HU10 & Implementar carga de archivo de recorrido en la aplicación móvil & 6 h & Baja \\ \hline
-HU10 & Visualizar datos cargados en tabla y mapa & 8 h & Media \\ \hline
-HU11 & Definir reglas para marcar aceleraciones y frenadas bruscas en el recorrido & 6 h & Media \\ \hline
-HU11 & Mostrar tramos marcados sobre el mapa desde datos en vivo o archivo cargado & 8 h & Alta \\ \hline
-\end{tabularx}
+\begin{enumerate}
+	\item Investigación (100 h)
+	\begin{enumerate}
+		\item Selección detallada de componentes y módulos comerciales (25 h)
+		\item Análisis de hojas de datos de sensores y microcontrolador (25 h)
+		\item Estudio de protocolos de comunicación y almacenamiento (25 h)
+		\item Revisión de librerías de soporte y ejemplos de integración (25 h)
+	\end{enumerate}
+	\item Diseño del sistema (90 h)
+	\begin{enumerate}
+		\item Diseño de la arquitectura del firmware y máquina de estados (30 h)
+		\item Definición del formato de datos y archivo de recorrido (20 h)
+		\item Diseño de interfaces entre sensores, almacenamiento y comunicación Bluetooth (20 h)
+		\item Definición de criterios de integración y validación (20 h)
+	\end{enumerate}
+	\item IMU y barómetro (50 h)
+	\begin{enumerate}
+		\item Configuración de la IMU e interfaz I2C (8 h)
+		\item Implementación de lectura de registros principales de la IMU (8 h)
+		\item Generación de archivo de prueba con muestras de la IMU (10 h)
+		\item Configuración del barómetro e interfaz I2C (8 h)
+		\item Implementación de lectura de presión atmosférica (8 h)
+		\item Generación de archivo de prueba con muestras del barómetro (8 h)
+	\end{enumerate}
+	\item GPS y temperatura (48 h)
+	\begin{enumerate}
+		\item Configuración del GPS y tasa de actualización (8 h)
+		\item Configuración de UART e implementación del parser básico de tramas (12 h)
+		\item Registro de latitud, longitud y velocidad en microSD (10 h)
+		\item Configuración del sensor de temperatura (6 h)
+		\item Implementación de lectura de temperatura (6 h)
+		\item Registro de temperatura y comparación contra referencia de banco (6 h)
+	\end{enumerate}
+	\item DMA y registro en microSD (60 h)
+	\begin{enumerate}
+		\item Configuración de DMA para lecturas de IMU (10 h)
+		\item Implementación del buffer de recepción de IMU (10 h)
+		\item Configuración de recepción GPS por UART con DMA (10 h)
+		\item Validación de recepción de tramas completas e incompletas (10 h)
+		\item Implementación de doble buffer para muestras de IMU y GPS (10 h)
+		\item Escritura de bloques en microSD y validación de persistencia (10 h)
+	\end{enumerate}
+	\item Aplicación móvil y eventos de conducción (56 h)
+	\begin{enumerate}
+		\item Definición del formato de telemetría Bluetooth (8 h)
+		\item Implementación de vista de datos en tiempo real en la aplicación móvil (8 h)
+		\item Integración de mapa y actualización de posición con datos GPS válidos (8 h)
+		\item Visualización de estados de desconexión (4 h)
+		\item Implementación de carga de archivo de recorrido (6 h)
+		\item Visualización de datos cargados en tabla y mapa (8 h)
+		\item Definición de reglas para aceleraciones y frenadas bruscas (6 h)
+		\item Visualización de eventos de conducción en el mapa (8 h)
+	\end{enumerate}
+	\item Validación en banco (114 h)
+	\begin{enumerate}
+		\item Integración del sistema completo (40 h)
+		\item Pruebas de comunicación entre sensores, microSD y Bluetooth (24 h)
+		\item Ajustes de robustez y manejo de errores (20 h)
+		\item Verificación de registros generados y trazabilidad de datos (20 h)
+		\item Pruebas funcionales de la aplicación móvil con datos simulados y reales (10 h)
+	\end{enumerate}
+	\item Documentación (82 h)
+	\begin{enumerate}
+		\item Documentación técnica del firmware y módulos implementados (22 h)
+		\item Registro de decisiones de diseño y criterios de validación (18 h)
+		\item Documentación de resultados de pruebas y validaciones (18 h)
+		\item Redacción de la memoria del trabajo final (24 h)
+	\end{enumerate}
+\end{enumerate}
+
+Cantidad total de horas: 600 h.
 
 
 \section{10. Diagrama de Activity On Node}
 \label{sec:AoN}
 
-\begin{consigna}{red}
-Armar el AoN a partir del WBS definido en la etapa anterior.
+El diagrama de \textit{Activity on Node} se construyó a partir del desglose de tareas de la sección anterior. Cada nodo representa una tarea, la variable \textit{t} indica la duración y las flechas muestran la relación de precedencia entre actividades. Todas las duraciones están expresadas en horas de trabajo.
 
-Una herramienta simple para desarrollar los diagramas es el Draw.io (\url{https://app.diagrams.net/}).
-\href{https://app.diagrams.net}{Draw.io}
 
-Indicar claramente en qué unidades están expresados los tiempos.
-De ser necesario indicar los caminos semicríticos y analizar sus tiempos mediante un cuadro.
-Es recomendable usar colores y un cuadro indicativo describiendo qué representa cada color.
-\end{consigna}
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=\linewidth,height=0.75\textheight,keepaspectratio]{Figuras/AoN.png}
+\caption{Diagrama \textit{Activity on Node} del proyecto.}
+\label{fig:aon}
+\end{figure}
+
 
 \section{11. Diagrama de Gantt}
 \label{sec:gantt}

@@ -1,0 +1,34 @@
+flowchart TD
+    INI((Inicio))
+
+    INV["1. Investigación<br/>t = 100 h"]
+    DIS["2. Diseño del sistema<br/>t = 90 h"]
+
+    IMU_BAR["3. IMU y barómetro<br/>t = 50 h"]
+    GPS_TEMP["4. GPS y temperatura<br/>t = 48 h"]
+
+    DMA_SD["5. DMA y registro en microSD<br/>t = 60 h"]
+    APP["6. Aplicación móvil y eventos<br/>t = 56 h"]
+    VAL["7. Validación en banco<br/>t = 114 h"]
+    DOC["8. Documentación<br/>t = 82 h"]
+
+    FIN((Fin))
+
+    INI --> INV --> DIS
+
+    DIS --> IMU_BAR --> APP
+    DIS --> GPS_TEMP --> APP
+
+    IMU_BAR -.-> DMA_SD
+    GPS_TEMP -.-> DMA_SD
+    DMA_SD -.-> VAL
+
+    APP --> VAL --> DOC --> FIN
+
+    classDef critical fill:#ffd7d7,stroke:#c62828,stroke-width:3px,color:#111;
+    classDef semicritical fill:#fff2cc,stroke:#d6a100,stroke-width:2px,color:#111;
+    classDef terminal fill:#eeeeee,stroke:#555,stroke-width:2px,color:#111;
+
+    class INV,DIS,IMU_BAR,GPS_TEMP,APP,VAL,DOC critical;
+    class DMA_SD semicritical;
+    class INI,FIN terminal;
