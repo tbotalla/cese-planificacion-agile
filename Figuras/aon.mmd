@@ -6,24 +6,25 @@ flowchart TD
 
     IMU_BAR["3. IMU y barómetro<br/>t = 50 h"]
     GPS_TEMP["4. GPS y temperatura<br/>t = 48 h"]
+    APP["5. Aplicación móvil y eventos<br/>t = 56 h"]
 
-    DMA_SD["5. DMA y registro en microSD<br/>t = 60 h"]
-    APP["6. Aplicación móvil y eventos<br/>t = 56 h"]
+    DMA_SD["6. DMA y registro en microSD<br/>t = 60 h"]
     VAL["7. Validación en banco<br/>t = 114 h"]
-    DOC["8. Documentación<br/>t = 82 h"]
+    DOC["8. Documentación<br/>t = 104 h"]
 
     FIN((Fin))
 
     INI --> INV --> DIS
 
-    DIS --> IMU_BAR --> APP
-    DIS --> GPS_TEMP --> APP
+    DIS --> IMU_BAR --> VAL
+    DIS --> GPS_TEMP --> VAL
+    DIS --> APP --> VAL
 
     IMU_BAR -.-> DMA_SD
     GPS_TEMP -.-> DMA_SD
     DMA_SD -.-> VAL
 
-    APP --> VAL --> DOC --> FIN
+    VAL --> DOC --> FIN
 
     classDef critical fill:#ffd7d7,stroke:#c62828,stroke-width:3px,color:#111;
     classDef semicritical fill:#fff2cc,stroke:#d6a100,stroke-width:2px,color:#111;

@@ -1,0 +1,32 @@
+/* ── Texto en negrita ──────────────────────────────── */
+text {
+  font-weight: 700 !important;
+  font-family: Arial, sans-serif !important;
+}
+.tick text {
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  fill: #111111 !important;
+}
+.sectionTitle {
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  fill: #111111 !important;
+}
+.taskText, .taskTextOutside {
+  font-weight: 700 !important;
+  font-size: 11px !important;
+}
+
+/* ── DMA: forzar relleno sólido (active por defecto es contorno) ── */
+rect.active, rect.activeInt, .task.active rect {
+  fill: #00838F !important;
+  stroke: #006064 !important;
+  opacity: 1 !important;
+}
+/* ── done: forzar relleno sólido ── */
+rect.done, rect.doneInt {
+  fill: #6A1B9A !important;
+  stroke: #4A148C !important;
+  opacity: 1 !important;
+}

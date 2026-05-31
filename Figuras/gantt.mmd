@@ -1,0 +1,88 @@
+%%{init: {
+  "locale": "es",
+  "theme": "base",
+  "themeVariables": {
+    "taskBkgColor":         "#1565C0",
+    "taskBorderColor":      "#0D47A1",
+    "critBkgColor":         "#C0392B",
+    "critBorderColor":      "#922B21",
+    "activeBkgColor":       "#00838F",
+    "activeBorderColor":    "#006064",
+    "doneBkgColor":         "#6A1B9A",
+    "doneBorderColor":      "#4A148C",
+    "taskTextColor":        "#ffffff",
+    "taskTextDarkColor":    "#ffffff",
+    "taskTextOutsideColor": "#222222",
+    "sectionBkgColor":      "#EEF2FF",
+    "altSectionBkgColor":   "#FDF4FF",
+    "gridColor":            "#BBBBBB",
+    "fontSize":             "14px",
+    "fontFamily":           "Arial, sans-serif"
+  }
+}}%%
+gantt
+    title .
+    dateFormat  YYYY-MM-DD
+    axisFormat  %B
+    tickInterval 1month
+    todayMarker off
+
+    section Investigación
+    Selección de componentes (25 h)          :inv1, 2026-07-01, 2026-07-08
+    Análisis de hojas de datos (25 h)        :inv2, 2026-07-08, 2026-07-15
+    Estudio de protocolos (25 h)             :inv3, 2026-07-15, 2026-07-22
+    Revisión de bibliotecas (25 h)           :inv4, 2026-07-22, 2026-07-29
+
+    section Diseño del sistema
+    Arquitectura y máquina de estados (30 h) :done, dis1, 2026-07-29, 2026-08-07
+    Formato de datos y recorrido (20 h)      :done, dis2, 2026-08-07, 2026-08-13
+    Interfaces sensores y Bluetooth (20 h)   :done, dis3, 2026-08-13, 2026-08-19
+    Criterios de integración (20 h)          :done, dis4, 2026-08-19, 2026-08-25
+
+    section IMU y barómetro
+    Configuración IMU e I2C (8 h)            :crit, imu1, 2026-08-25, 2026-08-27
+    Lectura de registros IMU (8 h)           :crit, imu2, 2026-08-27, 2026-08-29
+    Muestras IMU en archivo (10 h)           :crit, imu3, 2026-08-29, 2026-09-01
+    Configuración barómetro I2C (8 h)        :crit, imu4, 2026-09-01, 2026-09-03
+    Lectura de presión atmosférica (8 h)     :crit, imu5, 2026-09-03, 2026-09-05
+    Muestras barómetro en archivo (8 h)      :crit, imu6, 2026-09-05, 2026-09-07
+
+    section GPS y temperatura
+    Config. GPS y tasa actualización (8 h)   :crit, gps1, 2026-08-25, 2026-08-27
+    UART y parser de tramas GPS (12 h)       :crit, gps2, 2026-08-27, 2026-08-30
+    Registro lat/lon/vel en microSD (10 h)   :crit, gps3, 2026-08-30, 2026-09-02
+    Configuración sensor temperatura (6 h)   :crit, gps4, 2026-09-02, 2026-09-04
+    Lectura de temperatura (6 h)             :crit, gps5, 2026-09-04, 2026-09-06
+    Comparación temp. vs referencia (6 h)    :crit, gps6, 2026-09-06, 2026-09-08
+
+    section App móvil y eventos
+    Formato telemetría Bluetooth (8 h)       :crit, app1, 2026-08-25, 2026-08-27
+    Vista de datos en tiempo real (8 h)      :crit, app2, 2026-08-27, 2026-08-29
+    Integración de mapa con GPS (8 h)        :crit, app3, 2026-08-29, 2026-08-31
+    Visualización desconexión (4 h)          :crit, app4, 2026-08-31, 2026-09-02
+    Carga de archivo de recorrido (6 h)      :crit, app5, 2026-09-02, 2026-09-04
+    Visualización en tabla y mapa (8 h)      :crit, app6, 2026-09-04, 2026-09-06
+    Reglas de conducción brusca (6 h)        :crit, app7, 2026-09-06, 2026-09-08
+    Eventos de conducción en mapa (8 h)      :crit, app8, 2026-09-08, 2026-09-10
+
+    section DMA y microSD
+    Config. DMA para lecturas de IMU (10 h)  :active, dma1, 2026-09-10, 2026-09-13
+    Buffer de recepción de IMU (10 h)        :active, dma2, 2026-09-13, 2026-09-16
+    Recepción GPS por UART con DMA (10 h)    :active, dma3, 2026-09-16, 2026-09-19
+    Validación de recepción de tramas (10 h) :active, dma4, 2026-09-19, 2026-09-22
+    Doble buffer para IMU y GPS (10 h)       :active, dma5, 2026-09-22, 2026-09-25
+    Escritura en microSD y validación (10 h) :active, dma6, 2026-09-25, 2026-09-28
+
+    section Validación en banco
+    Integración del sistema (40 h)           :val1, 2026-09-28, 2026-10-10
+    Pruebas de comunicación (24 h)           :val2, 2026-10-10, 2026-10-17
+    Ajustes de robustez (20 h)               :val3, 2026-10-17, 2026-10-23
+    Verificación de registros (20 h)         :val4, 2026-10-23, 2026-10-29
+    Pruebas funcionales app móvil (10 h)     :val5, 2026-10-29, 2026-11-01
+
+    section Documentación
+    Documentación técnica firmware (20 h)    :done, doc1, 2026-11-01, 2026-11-07
+    Registro de decisiones (16 h)            :done, doc2, 2026-11-07, 2026-11-12
+    Documentación de resultados (16 h)       :done, doc3, 2026-11-12, 2026-11-17
+    Informes de avance (12 h)                :done, doc4, 2026-11-17, 2026-11-21
+    Redacción de la memoria (40 h)           :crit, mem,  2026-11-01, 2026-12-31

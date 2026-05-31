@@ -86,7 +86,7 @@ Buenos Aires, \fechaInicioName
 
 \vspace{2cm}
 
-Por medio de la presente se acuerda con el \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'' y consistirá en el desarrollo de un sistema embebido de adquisición, registro y transmisión en tiempo real de datos de telemetría para motocicletas. El trabajo tendrá un presupuesto preliminar estimado de 600 horas y un costo estimado de US\$ 32.336, con fecha de inicio el \fechaInicioName\hspace{1px} y fecha de presentación pública en el \fechaFinalName.
+Por medio de la presente se acuerda con el \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'' y consistirá en el desarrollo de un sistema embebido de adquisición, registro y transmisión en tiempo real de datos de telemetría para motocicletas. El trabajo tendrá un presupuesto preliminar estimado de 600 horas y un costo estimado de \$ 45.270.000, con fecha de inicio el \fechaInicioName\hspace{1px} y fecha de presentación pública en el \fechaFinalName.
 
 Se adjunta a esta acta la planificación inicial.
 
@@ -204,12 +204,12 @@ Para el desarrollo del presente proyecto se supone que:
 	\item El responsable del proyecto, \authorname, solo se ausentará de manera indefinida en caso de enfrentar una situación de fuerza mayor.
 \end{itemize}
 
+\pagebreak
+
 \section{6. Requerimientos}
 \label{sec:requerimientos}
 
 Los requerimientos se agrupan por afinidad y se priorizan según su aporte al objetivo del proyecto.
-
-\pagebreak
 
 \begin{enumerate}
 	\item Requerimientos funcionales:
@@ -243,181 +243,78 @@ Los requerimientos se agrupan por afinidad y se priorizan según su aporte al ob
 \section{7. Historias de usuarios (\textit{Product backlog})}
 \label{sec:backlog}
 
-En esta sección se presentan las historias de usuario, agrupadas en épicas y formuladas según el rol que las motiva.
-
-Para estimar el esfuerzo relativo entre historias se decidió utilizar story points. En esta ponderación se tienen en cuenta la cantidad de trabajo, la complejidad técnica, el riesgo y la incertidumbre asociados a cada historia. Los valores son relativos en escala Fibonacci (1, 2, 3, 5, 8, 13). Como referencia de 1 story point se considera el esfuerzo de integrar un sensor en bus I2C y establecer la comunicación con el microcontrolador.
+Para estimar el esfuerzo relativo entre historias se decidió utilizar story points. Cada historia se evalúa en tres dimensiones, cada una con un peso según la siguiente tabla:
 
 \begin{itemize}
-  \item \textbf{Épica 1: IMU y barómetro}
-  \begin{itemize}
+  \item \textbf{Dificultad} (cantidad de trabajo a realizar): bajo → 1, medio → 3, alto → 5.
+  \item \textbf{Complejidad} (nivel de sofisticación del trabajo): bajo → 1, medio → 5, alto → 13.
+  \item \textbf{Incertidumbre} (riesgo o falta de experiencia en la tarea): bajo → 2, medio → 3, alto → 5.
+\end{itemize}
+
+La suma de los tres pesos se aproxima al número de Fibonacci más cercano (1, 2, 3, 5, 8, 13, 21) para obtener el story point final. Como referencia de 1 story point se considera el esfuerzo de integrar un sensor en bus I2C y establecer la comunicación con el microcontrolador.
+
+\begin{itemize}
     \item HU1: como responsable del proyecto, quiero un archivo de texto almacenado en una microSD con datos de la IMU para validar el funcionamiento de la misma.
     \begin{itemize}
       \item Prioridad: alta
-      \item Story points: 8
+      \item Story points: 8 (dificultad: medio(3), complejidad: medio(5), incertidumbre: bajo(2); suma: 10 $\approx$ 8)
     \end{itemize}
     \item HU2: como responsable del proyecto, quiero un archivo de texto almacenado en una microSD con datos del barómetro para validar el funcionamiento del mismo.
     \begin{itemize}
       \item Prioridad: alta
-      \item Story points: 5
+      \item Story points: 5 (dificultad: bajo(1), complejidad: bajo(1), incertidumbre: medio(3); suma: 5)
     \end{itemize}
-  \end{itemize}
-  \item \textbf{Épica 2: GPS y temperatura}
-  \begin{itemize}
     \item HU3: como responsable del proyecto, quiero un archivo de texto almacenado en una microSD con latitud, longitud y velocidad para validar el GPS.
     \begin{itemize}
       \item Prioridad: alta
-      \item Story points: 8
+      \item Story points: 8 (dificultad: medio(3), complejidad: medio(5), incertidumbre: bajo(2); suma: 10 $\approx$ 8)
     \end{itemize}
     \item HU4: como responsable del proyecto, quiero un archivo de texto almacenado en una microSD con datos de temperatura, para validar el funcionamiento del sensor.
     \begin{itemize}
       \item Prioridad: media
-      \item Story points: 5
+      \item Story points: 5 (dificultad: bajo(1), complejidad: bajo(1), incertidumbre: medio(3); suma: 5)
     \end{itemize}
-  \end{itemize}
-  \item \textbf{Épica 3: DMA y doble buffer en microSD}
-  \begin{itemize}
     \item HU5: como responsable del proyecto, quiero obtener las lecturas de la IMU usando DMA hacia un buffer en RAM, para reducir el trabajo de la CPU.
     \begin{itemize}
-      \item historia opcional
+      \item Historia opcional
       \item Prioridad: media
-      \item Story points: 8
+      \item Story points: 8 (dificultad: medio(3), complejidad: medio(5), incertidumbre: bajo(2); suma: 10 $\approx$ 8)
     \end{itemize}
     \item HU6: como responsable del proyecto, quiero obtener las lecturas del GPS usando DMA hacia memoria, para reducir el trabajo de la CPU.
     \begin{itemize}
-      \item historia opcional
+      \item Historia opcional
       \item Prioridad: media
-      \item Story points: 8
+      \item Story points: 8 (dificultad: medio(3), complejidad: medio(5), incertidumbre: bajo(2); suma: 10 $\approx$ 8)
     \end{itemize}
     \item HU7: como responsable del proyecto, quiero grabar en una microSD los datos de la IMU y el GPS usando doble buffer en RAM y escritura hacia la microSD, para asegurar que los datos no se pierdan.
     \begin{itemize}
       \item Prioridad: alta
-      \item Story points: 13
+      \item Story points: 13 (dificultad: alto(5), complejidad: medio(5), incertidumbre: medio(3); suma: 13)
     \end{itemize}
-  \end{itemize}
-  \item \textbf{Épica 4: aplicación móvil}
-  \begin{itemize}
     \item HU8: como usuario, quiero ver en la aplicación móvil los datos del recorrido en tiempo real, para monitorear el viaje mientras circulo.
     \begin{itemize}
       \item Prioridad: alta
-      \item Story points: 8
+      \item Story points: 8 (dificultad: medio(3), complejidad: medio(5), incertidumbre: bajo(2); suma: 10 $\approx$ 8)
     \end{itemize}
     \item HU9: como usuario, quiero ver en la aplicación móvil la posición actual en un mapa, para ubicarme en la ruta.
     \begin{itemize}
       \item Prioridad: alta
-      \item Story points: 8
+      \item Story points: 8 (dificultad: bajo(1), complejidad: medio(5), incertidumbre: medio(3); suma: 9 $\approx$ 8)
     \end{itemize}
     \item HU10: como usuario, quiero cargar en la aplicación móvil un archivo de texto exportado de un recorrido y visualizar sus datos, para revisar viajes ya grabados sin conexión en tiempo real con la motocicleta.
     \begin{itemize}
       \item Prioridad: media
-      \item Story points: 5
+      \item Story points: 5 (dificultad: bajo(1), complejidad: bajo(1), incertidumbre: medio(3); suma: 5)
     \end{itemize}
     \item HU11: como usuario, quiero ver en el mapa los tramos donde hubo aceleraciones o frenadas bruscas, para localizar esas maniobras en el trayecto.
     \begin{itemize}
       \item Prioridad: alta
-      \item Story points: 5
+      \item Story points: 5 (dificultad: bajo(1), complejidad: bajo(1), incertidumbre: medio(3); suma: 5)
     \end{itemize}
-  \end{itemize}
-  \item \textbf{Épica 5: investigación y documentación}
-  \begin{itemize}
     \item HU12: como responsable del proyecto, quiero investigar las decisiones técnicas y documentar el diseño, la validación y los resultados, para asegurar la trazabilidad del desarrollo y facilitar la revisión del trabajo final.
     \begin{itemize}
       \item Prioridad: alta
-      \item Story points: 13
-    \end{itemize}
-  \end{itemize}
-\end{itemize}
-
-\subsection*{Criterios de aceptación de historias de usuario}
-\label{sec:criteriosAceptacion}
-
-
-\begin{itemize}
-  \item \textbf{Épica 1: IMU y barómetro}
-    \begin{itemize}
-      \item HU1
-        \begin{itemize}
-          \item Se genera un archivo de texto en la microSD con datos de la IMU durante una prueba de al menos 2 minutos.
-          \item Cada registro incluye marca de tiempo y lecturas de acelerómetro y giroscopio.
-          \item El archivo contiene datos consistentes con el movimiento aplicado al sensor.
-        \end{itemize}
-      \item HU2
-        \begin{itemize}
-          \item Se genera un archivo de texto en la microSD con datos del barómetro durante una prueba de al menos 2 minutos.
-          \item Cada registro incluye marca de tiempo y el valor de presión atmosférica.
-          \item El archivo contiene datos consistentes con la presión atmosférica al momento de la prueba.
-        \end{itemize}
-    \end{itemize}
-  \item \textbf{Épica 2: GPS y temperatura}
-    \begin{itemize}
-      \item HU3
-        \begin{itemize}
-          \item Se genera un archivo de texto en la microSD con latitud, longitud y velocidad durante una prueba de al menos 2 minutos.
-          \item Cada registro incluye marca de tiempo y el valor de la latitud, longitud, y velocidad si corresponde.
-          \item El archivo contiene datos consistentes con la posición al momento de la prueba.
-        \end{itemize}
-      \item HU4
-        \begin{itemize}
-          \item Se genera un archivo de texto en la microSD con la lectura del sensor de temperatura durante una prueba de al menos 2 minutos.
-          \item Cada registro incluye marca de tiempo y valor de temperatura en grados Celsius.
-          \item El archivo contiene datos consistentes con la temperatura al momento de la prueba.
-        \end{itemize}
-    \end{itemize}
-  \item \textbf{Épica 3: DMA y doble buffer en microSD}
-    \begin{itemize}
-      \item HU5
-        \begin{itemize}
-          \item La IMU se lee usando DMA hacia un buffer en RAM sin que la CPU copie cada dato recibido.
-          \item Durante una prueba de al menos 2 minutos no se detectan errores de transferencia DMA.
-          \item La cantidad de muestras almacenadas en el buffer coincide con la frecuencia de muestreo configurada.
-        \end{itemize}
-      \item HU6
-        \begin{itemize}
-          \item Los datos del GPS se reciben usando DMA hacia memoria sin procesar interrupciones por cada dato recibido.
-          \item Durante una prueba de al menos 2 minutos se reciben tramas completas de GPS.
-          \item Las tramas inválidas se registran como error sin bloquear el sistema.
-        \end{itemize}
-      \item HU7
-        \begin{itemize}
-          \item Se escriben en microSD los datos de IMU y GPS a medida que se generan, usando un esquema de doble buffer en RAM.
-          \item Los datos escritos en la microSD persisten luego de la prueba.
-          \item Durante una prueba de al menos 2 minutos no se pierden muestras, verificando que mientras un buffer se escribe en la microSD el otro continúa recibiendo datos nuevos.
-        \end{itemize}
-    \end{itemize}
-  \item \textbf{Épica 4: aplicación móvil}
-    \begin{itemize}
-      \item HU8
-        \begin{itemize}
-          \item La aplicación móvil muestra datos del recorrido recibidos en tiempo real desde el dispositivo.
-          \item Si se interrumpe la comunicación, la aplicación indica la pérdida de conexión al usuario.
-          \item Los datos mostrados incluyen: altitud, latitud, longitud, velocidad, temperatura, y ángulo de inclinación.
-        \end{itemize}
-      \item HU9
-        \begin{itemize}
-          \item La aplicación móvil muestra la posición actual en un mapa.
-          \item La posición mostrada se actualiza con cada nuevo dato válido de GPS recibido.
-          \item Si hay un error de lectura del GPS, la aplicación informa que la posición no está disponible.
-        \end{itemize}
-      \item HU10
-        \begin{itemize}
-          \item La aplicación móvil permite cargar un archivo de texto exportado de un recorrido.
-          \item Los datos del archivo se muestran en pantalla sin requerir conexión con la motocicleta.
-          \item Si el archivo no tiene el formato esperado, la aplicación muestra un mensaje de error.
-        \end{itemize}
-      \item HU11
-        \begin{itemize}
-          \item La aplicación móvil muestra en el mapa los tramos asociados a aceleraciones o frenadas bruscas.
-          \item Cada tramo marcado queda asociado a una posición y a un instante del recorrido.
-          \item La visualización funciona tanto para datos recibidos en vivo como para un archivo de recorrido cargado.
-        \end{itemize}
-    \end{itemize}
-  \item \textbf{Épica 5: investigación y documentación}
-    \begin{itemize}
-      \item HU12
-        \begin{itemize}
-          \item Se registra la selección de componentes, sensores, protocolos y librerías utilizadas en el proyecto.
-          \item Se documentan las decisiones principales de diseño del firmware y del formato de datos.
-          \item Se incluyen resultados de validación en banco y conclusiones técnicas en la documentación del trabajo final.
-        \end{itemize}
+      \item Story points: 13 (dificultad: alto(5), complejidad: medio(5), incertidumbre: medio(3); suma: 13)
     \end{itemize}
 \end{itemize}
 
@@ -431,6 +328,7 @@ Los entregables principales del proyecto son:
 	\item Aplicación móvil para visualización de telemetría en tiempo real y recorridos almacenados.
     \item Documentación técnica del sistema.
     \item Informe de pruebas y validaciones.
+    \item Informes de avance del trabajo final.
     \item Prototipo funcional (hardware).
 	\item Memoria del trabajo final.
 \end{itemize}
@@ -444,7 +342,7 @@ Los entregables principales del proyecto son:
 		\item Selección detallada de componentes y módulos comerciales (25 h)
 		\item Análisis de hojas de datos de sensores y microcontrolador (25 h)
 		\item Estudio de protocolos de comunicación y almacenamiento (25 h)
-		\item Revisión de librerías de soporte y ejemplos de integración (25 h)
+		\item Revisión de bibliotecas de soporte y ejemplos de integración (25 h)
 	\end{enumerate}
 	\item Diseño del sistema (90 h)
 	\begin{enumerate}
@@ -453,7 +351,7 @@ Los entregables principales del proyecto son:
 		\item Diseño de interfaces entre sensores, almacenamiento y comunicación Bluetooth (20 h)
 		\item Definición de criterios de integración y validación (20 h)
 	\end{enumerate}
-	\item IMU y barómetro (50 h)
+	\item Desarrollo de IMU y barómetro (50 h)
 	\begin{enumerate}
 		\item Configuración de la IMU e interfaz I2C (8 h)
 		\item Implementación de lectura de registros principales de la IMU (8 h)
@@ -462,7 +360,7 @@ Los entregables principales del proyecto son:
 		\item Implementación de lectura de presión atmosférica (8 h)
 		\item Generación de archivo de prueba con muestras del barómetro (8 h)
 	\end{enumerate}
-	\item GPS y temperatura (48 h)
+	\item Desarrollo de GPS y temperatura (48 h)
 	\begin{enumerate}
 		\item Configuración del GPS y tasa de actualización (8 h)
 		\item Configuración de UART e implementación del parser básico de tramas (12 h)
@@ -471,7 +369,7 @@ Los entregables principales del proyecto son:
 		\item Implementación de lectura de temperatura (6 h)
 		\item Registro de temperatura y comparación contra referencia de banco (6 h)
 	\end{enumerate}
-	\item DMA y registro en microSD (60 h)
+	\item Desarrollo de DMA y registro en microSD (60 h)
 	\begin{enumerate}
 		\item Configuración de DMA para lecturas de IMU (10 h)
 		\item Implementación del buffer de recepción de IMU (10 h)
@@ -480,7 +378,7 @@ Los entregables principales del proyecto son:
 		\item Implementación de doble buffer para muestras de IMU y GPS (10 h)
 		\item Escritura de bloques en microSD y validación de persistencia (10 h)
 	\end{enumerate}
-	\item Aplicación móvil y eventos de conducción (56 h)
+	\item Desarrollo de aplicación móvil y eventos de conducción (56 h)
 	\begin{enumerate}
 		\item Definición del formato de telemetría Bluetooth (8 h)
 		\item Implementación de vista de datos en tiempo real en la aplicación móvil (8 h)
@@ -495,27 +393,35 @@ Los entregables principales del proyecto son:
 	\begin{enumerate}
 		\item Integración del sistema completo (40 h)
 		\item Pruebas de comunicación entre sensores, microSD y Bluetooth (24 h)
-		\item Ajustes de robustez y manejo de errores (20 h)
+		\item Ajustes de robustez y refinamiento del comportamiento del sistema (20 h)
 		\item Verificación de registros generados y trazabilidad de datos (20 h)
 		\item Pruebas funcionales de la aplicación móvil con datos simulados y reales (10 h)
 	\end{enumerate}
-	\item Documentación (82 h)
+	\item Documentación (104 h)
 	\begin{enumerate}
-		\item Documentación técnica del firmware y módulos implementados (22 h)
-		\item Registro de decisiones de diseño y criterios de validación (18 h)
-		\item Documentación de resultados de pruebas y validaciones (18 h)
-		\item Redacción de la memoria del trabajo final (24 h)
+		\item Documentación técnica del firmware y módulos implementados (20 h)
+		\item Registro de decisiones de diseño y criterios de validación (16 h)
+		\item Documentación de resultados de pruebas y validaciones (16 h)
+		\item Elaboración de informes de avance del trabajo final (12 h)
+		\item Redacción de la memoria del trabajo final (40 h)
 	\end{enumerate}
 \end{enumerate}
 
-Cantidad total de horas: 600 h.
+Cantidad total de horas: 622 h.
 
 
 \section{10. Diagrama de Activity On Node}
 \label{sec:AoN}
 
-El diagrama de \textit{Activity on Node} se construyó a partir del desglose de tareas de la sección anterior. Cada nodo representa una tarea, la variable \textit{t} indica la duración y las flechas muestran la relación de precedencia entre actividades. Todas las duraciones están expresadas en horas de trabajo.
+El diagrama de \textit{Activity on Node} se construyó a partir del desglose de tareas de la sección anterior. Cada nodo representa una tarea, la variable \textit{t} indica la duración en horas de trabajo y las flechas muestran la relación de precedencia entre actividades. Las flechas punteadas indican dependencias opcionales.
 
+Las tareas de desarrollo de sensores (IMU y barómetro, GPS y temperatura) y la aplicación móvil se ejecutan en \textbf{paralelo} una vez finalizado el diseño del sistema. Dentro de cada grupo las subtareas son secuenciales, pero los grupos en sí no tienen dependencia entre sí. Los colores indican:
+
+\begin{itemize}
+  \item \textbf{Rojo}: actividades obligatorias del proyecto.
+  \item \textbf{Amarillo}: actividades semicríticas u opcionales.
+  \item \textbf{Gris}: nodos terminales (inicio y fin).
+\end{itemize}
 
 \begin{figure}[htpb]
 \centering
@@ -524,6 +430,8 @@ El diagrama de \textit{Activity on Node} se construyó a partir del desglose de 
 \label{fig:aon}
 \end{figure}
 
+El camino crítico es: \textbf{Investigación $\rightarrow$ Diseño $\rightarrow$ Aplicación móvil y eventos $\rightarrow$ Validación $\rightarrow$ Documentación}, con una duración total de \textbf{464 h} (100 h + 90 h + 56 h + 114 h + 104 h).
+
 
 \clearpage
 \section{11. Diagrama de Gantt}
@@ -531,7 +439,7 @@ El diagrama de \textit{Activity on Node} se construyó a partir del desglose de 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth,height=0.7\textheight,keepaspectratio]{Figuras/gantt.png}
+\includegraphics[width=0.85\linewidth,height=0.92\textheight,keepaspectratio]{Figuras/gantt.png}
 \caption{Diagrama de Gantt del proyecto.}
 \label{fig:gantt}
 \end{figure}
@@ -588,7 +496,7 @@ Kit de prototipado, protoboard, fuente MB102 y cables &
   1 &
   \$ 19.000 &
   \$ 19.000 \\ \hline
-Power bank 10000 mAh para pruebas de campo &
+\textit{Power bank} 10000 mAh para pruebas de campo &
   1 &
   \$ 45.000 &
   \$ 45.000 \\ \hline
@@ -628,35 +536,51 @@ El costo total del proyecto equivale a US\$ 32.336 según la cotización del Ban
 \section{13. Gestión de riesgos}
 \label{sec:riesgos}
 
-\begin{consigna}{red}
-a) Identificación de los riesgos (al menos cinco) y estimación de sus consecuencias:
- 
-Riesgo 1: detallar el riesgo (riesgo es algo que si ocurre altera los planes previstos de forma negativa)
-\begin{itemize}
-	\item Severidad (S): mientras más severo, más alto es el número (usar números del 1 al 10).\\
-	Justificar el motivo por el cual se asigna determinado número de severidad (S).
-	\item Probabilidad de ocurrencia (O): mientras más probable, más alto es el número (usar del 1 al 10).\\
-	Justificar el motivo por el cual se asigna determinado número de (O). 
-\end{itemize}   
+a) Identificación de los riesgos y estimación de sus consecuencias:
 
-Riesgo 2:
+A continuación se detallan los riesgos principales del proyecto. Cada riesgo se evalúa mediante severidad (S) y ocurrencia (O), con valores de 1 a 10.
+
+Riesgo 1: demora en la adquisición de componentes o módulos comerciales.
 \begin{itemize}
-	\item Severidad (S): X.\\
-	Justificación...
-	\item Ocurrencia (O): Y.\\
-	Justificación...
+	\item Severidad (S): 8.\\
+	Una demora en la compra o entrega de la placa de desarrollo, sensores, módulo GPS, módulo Bluetooth o microSD puede retrasar el inicio de las pruebas de integración.
+	\item Ocurrencia (O): 4.\\
+	Los componentes principales se consiguen en el mercado local, aunque puede existir variabilidad de stock, precios y tiempos de envío.
 \end{itemize}
 
-Riesgo 3:
+Riesgo 2: daño del prototipo durante pruebas en motocicleta.
 \begin{itemize}
-	\item Severidad (S):  X.\\
-	Justificación...
-	\item Ocurrencia (O): Y.\\
-	Justificación...
+	\item Severidad (S): 8.\\
+	La rotura del prototipo puede obligar a repetir tareas de integración y validación.
+	\item Ocurrencia (O): 4.\\
+	Las pruebas se realizarán en un entorno con vibración, movimiento y exposición a posibles desconexiones mecánicas.
 \end{itemize}
 
+Riesgo 3: integración tardía entre firmware, Bluetooth y aplicación móvil.
+\begin{itemize}
+	\item Severidad (S): 9.\\
+	Si la integración se retrasa, puede quedar comprometida la validación funcional completa del sistema.
+	\item Ocurrencia (O): 4.\\
+	El proyecto combina firmware embebido, comunicación Bluetooth y una aplicación móvil, lo que incrementa la cantidad de interfaces a validar.
+\end{itemize}
 
-b) Tabla de gestión de riesgos:      (El RPN se calcula como RPN=SxO)
+Riesgo 4: desempeño insuficiente del GPS o Bluetooth en condiciones reales.
+\begin{itemize}
+	\item Severidad (S): 7.\\
+	Una mala recepción GPS o una comunicación Bluetooth inestable puede degradar la experiencia de uso y limitar las pruebas de campo.
+	\item Ocurrencia (O): 4.\\
+	La calidad de señal depende de la ubicación del módulo, la orientación de la antena y el entorno de prueba.
+\end{itemize}
+
+Riesgo 5: tiempo insuficiente para dominar tecnologías críticas del proyecto.
+\begin{itemize}
+	\item Severidad (S): 7.\\
+	La falta de experiencia en DMA, manejo robusto de microSD, interpretación de GPS o desarrollo móvil puede demorar tareas técnicas clave.
+	\item Ocurrencia (O): 5.\\
+	El proyecto integra varias tecnologías que requieren pruebas de concepto y ajustes iterativos.
+\end{itemize}
+
+b) Tabla de gestión de riesgos: (El RPN se calcula como RPN = S x O)
 
 \begin{table}[H]
 \centering
@@ -664,39 +588,62 @@ b) Tabla de gestión de riesgos:      (El RPN se calcula como RPN=SxO)
 \hline
 \rowcolor[HTML]{C0C0C0} 
 Riesgo & S & O & RPN & S* & O* & RPN* \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
+Demora en la adquisición de componentes & 8 & 4 & 32 & 8 & 3 & 24 \\ \hline
+Daño del prototipo durante pruebas en motocicleta & 8 & 4 & 32 & 8 & 2 & 16 \\ \hline
+Integración tardía entre firmware, Bluetooth y aplicación móvil & 9 & 4 & 36 & 9 & 2 & 18 \\ \hline
+Desempeño insuficiente del GPS o Bluetooth en condiciones reales & 7 & 4 & 28 & -- & -- & -- \\ \hline
+Tiempo insuficiente para dominar tecnologías críticas & 7 & 5 & 35 & 7 & 3 & 21 \\ \hline
 \end{tabularx}%
 \end{table}
 
 \FloatBarrier
 \pagebreak
 
-Criterio adoptado: 
-
-Se tomarán medidas de mitigación en los riesgos cuyos números de RPN sean mayores a...
+Criterio adoptado: se tomarán medidas de mitigación en los riesgos cuyos números de RPN sean mayores a 30.
 
 Nota: los valores marcados con (*) en la tabla corresponden luego de haber aplicado la mitigación.
 
 c) Plan de mitigación de los riesgos que originalmente excedían el RPN máximo establecido:
- 
-Riesgo 1: plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación).
-  Nueva asignación de S y O, con su respectiva justificación:
-  \begin{itemize}
-	\item Severidad (S*): mientras más severo, más alto es el número (usar números del 1 al 10).
-          Justificar el motivo por el cual se asigna determinado número de severidad (S).
-	\item Probabilidad de ocurrencia (O*): mientras más probable, más alto es el número (usar del 1 al 10).
-          Justificar el motivo por el cual se asigna determinado número de (O).
-	\end{itemize}
 
-Riesgo 2: plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación).
- 
-Riesgo 3: plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación).
+Riesgo 1: demora en la adquisición de componentes o módulos comerciales.
 
-\end{consigna}
+Plan de mitigación: realizar la compra de componentes al inicio del proyecto, identificar proveedores alternativos y priorizar módulos disponibles en el mercado local.
+\begin{itemize}
+	\item Severidad (S*): 8.\\
+	La severidad se mantiene, ya que no contar con componentes sigue afectando el cronograma.
+	\item Ocurrencia (O*): 3.\\
+	La compra anticipada y la disponibilidad de alternativas reducen la probabilidad de retrasos.
+\end{itemize}
+
+Riesgo 2: daño del prototipo durante pruebas en motocicleta.
+
+Plan de mitigación: realizar primero pruebas de banco, usar fijaciones mecánicas simples pero firmes, proteger conexiones y contar con repuestos para módulos críticos.
+\begin{itemize}
+	\item Severidad (S*): 8.\\
+	La severidad se mantiene porque una rotura durante pruebas puede seguir requiriendo retrabajo.
+	\item Ocurrencia (O*): 2.\\
+	Las pruebas progresivas y la protección física reducen la probabilidad de daño.
+\end{itemize}
+
+Riesgo 3: integración tardía entre firmware, Bluetooth y aplicación móvil.
+
+Plan de mitigación: definir un protocolo mínimo de telemetría desde el inicio, probar la aplicación con datos simulados y realizar integraciones incrementales antes de completar todos los sensores.
+\begin{itemize}
+	\item Severidad (S*): 9.\\
+	La severidad se mantiene porque la integración completa es necesaria para validar el sistema.
+	\item Ocurrencia (O*): 2.\\
+	El uso de datos simulados y pruebas incrementales reduce el riesgo de descubrir problemas de integración al final del proyecto.
+\end{itemize}
+
+Riesgo 5: tiempo insuficiente para dominar tecnologías críticas del proyecto.
+
+Plan de mitigación: realizar pruebas de concepto acotadas para DMA, microSD, GPS y Bluetooth antes de su integración final, y reutilizar bibliotecas o ejemplos probados cuando sea conveniente.
+\begin{itemize}
+	\item Severidad (S*): 7.\\
+	La severidad se mantiene porque las tecnologías críticas siguen siendo necesarias para cumplir el alcance.
+	\item Ocurrencia (O*): 3.\\
+	Las pruebas de concepto tempranas reducen la incertidumbre técnica antes de comprometer el cronograma principal.
+\end{itemize}
 
 \section{14. Gestión de la calidad}
 \label{sec:calidad}
@@ -704,52 +651,52 @@ Riesgo 3: plan de mitigación (si por el RPN fuera necesario elaborar un plan de
 Las acciones de verificación y validación se definen a partir de los requerimientos principales y de los criterios de aceptación de las historias de usuario.
 
 \begin{itemize}
-\item Req \#1: registro de datos de la IMU en microSD.
+\item Requerimiento 1. Registro de datos de la IMU en microSD.
 	\begin{itemize}
 	\item Verificación: ejecutar una prueba de al menos 2 minutos y confirmar que el archivo generado incluye marca de tiempo, acelerómetro y giroscopio.
 	\item Validación: revisar con el director que los datos registrados sean consistentes con el movimiento aplicado al sensor.
 	\end{itemize}
-\item Req \#2: registro de datos del barómetro.
+\item Requerimiento 2. Registro de datos del barómetro.
 	\begin{itemize}
 	\item Verificación: generar un archivo de prueba en microSD y confirmar que cada registro incluya marca de tiempo y presión atmosférica.
 	\item Validación: comparar las lecturas con condiciones ambientales esperadas durante la prueba.
 	\end{itemize}
-\item Req \#3: registro de posición y velocidad GPS.
+\item Requerimiento 3. Registro de posición y velocidad GPS.
 	\begin{itemize}
 	\item Verificación: recibir tramas GPS válidas durante una prueba de al menos 2 minutos y registrar latitud, longitud y velocidad.
 	\item Validación: comprobar que la posición registrada sea coherente con la ubicación de prueba.
 	\end{itemize}
-\item Req \#4: registro de temperatura.
+\item Requerimiento 4. Registro de temperatura.
 	\begin{itemize}
 	\item Verificación: registrar temperatura en microSD con marca de tiempo y unidades en grados Celsius.
 	\item Validación: comparar la lectura contra una referencia de banco.
 	\end{itemize}
-\item Req \#5: uso de DMA para lecturas de IMU.
+\item Requerimiento 5. Uso de DMA para lecturas de IMU.
 	\begin{itemize}
 	\item Verificación: confirmar que la IMU se lea usando DMA hacia un buffer en RAM sin copia manual de cada muestra por CPU.
 	\item Validación: verificar que durante una prueba no se detecten errores de transferencia y que la cantidad de muestras coincida con la frecuencia configurada.
 	\end{itemize}
-\item Req \#6: recepción GPS con DMA.
+\item Requerimiento 6. Recepción GPS con DMA.
 	\begin{itemize}
 	\item Verificación: confirmar que las tramas GPS se reciban por UART con DMA hacia memoria.
 	\item Validación: evaluar recepción de tramas completas y manejo de tramas inválidas sin bloqueo del sistema.
 	\end{itemize}
-\item Req \#7: escritura en microSD con doble buffer.
+\item Requerimiento 7. Escritura en microSD con doble buffer.
 	\begin{itemize}
 	\item Verificación: comprobar que mientras un buffer se escribe en microSD el otro continúe recibiendo datos nuevos.
 	\item Validación: ejecutar una prueba de al menos 2 minutos sin pérdida de muestras y confirmar persistencia del archivo.
 	\end{itemize}
-\item Req \#8: visualización móvil de telemetría en tiempo real.
+\item Requerimiento 8. Visualización móvil de telemetría en tiempo real.
 	\begin{itemize}
 	\item Verificación: confirmar que la aplicación muestre altitud, latitud, longitud, velocidad, temperatura y ángulo de inclinación.
 	\item Validación: verificar que ante una interrupción de comunicación se informe la pérdida de conexión al usuario.
 	\end{itemize}
-\item Req \#9: visualización de posición actual en mapa.
+\item Requerimiento 9. Visualización de posición actual en mapa.
 	\begin{itemize}
 	\item Verificación: confirmar que la posición se actualice con cada dato GPS válido.
 	\item Validación: comprobar que ante errores de lectura se informe que la posición no está disponible.
 	\end{itemize}
-\item Req \#10: carga de recorridos almacenados.
+\item Requerimiento 10. Carga de recorridos almacenados.
 	\begin{itemize}
 	\item Verificación: cargar un archivo exportado y mostrar sus datos sin conexión con la motocicleta.
 	\item Validación: comprobar que ante un archivo con formato inválido la aplicación muestre un mensaje de error.
@@ -759,17 +706,35 @@ Las acciones de verificación y validación se definen a partir de los requerimi
 \section{15. Procesos de cierre}    
 \label{sec:cierre}
 
-\begin{consigna}{red}
-Establecer las pautas de trabajo para realizar una reunión final de evaluación del proyecto, contemplando:
+Al finalizar el proyecto se realizará una reunión de cierre entre el responsable del proyecto y el director del Trabajo Final. El objetivo será revisar los resultados obtenidos, contrastarlos con la planificación inicial y registrar las lecciones aprendidas.
 
-\begin{itemize}
-	\item Pautas para analizar si se respetó el plan de proyecto original, indicando responsable y procedimiento.
-	\item Identificación de técnicas y procedimientos útiles e inútiles, problemas encontrados y soluciones aplicadas.
-	\item Organización del acto de agradecimiento a los interesados, equipo de trabajo y colaboradores, indicando responsable y financiamiento.
-\end{itemize}
-\end{consigna}
+\begin{enumerate}
+	\item Análisis del cumplimiento del plan de proyecto.
 
+	El responsable será el \authorname. Se comparará la planificación original contra la ejecución real del proyecto, considerando alcance, cronograma, presupuesto, riesgos y entregables. Para ello se revisarán el diagrama de Gantt, el registro de tareas realizadas, los costos finales y los resultados de las pruebas de validación.
 
+	Como resultado de esta actividad se documentarán los desvíos principales, sus causas y las acciones tomadas durante el desarrollo.
+
+	\item Identificación de técnicas y procedimientos útiles e inútiles.
+
+	Se revisarán las decisiones técnicas aplicadas durante el proyecto, incluyendo el uso de la máquina de estados, el manejo de sensores, la escritura en microSD, la comunicación Bluetooth, el uso de DMA y la estrategia de pruebas.
+
+	Se identificarán las prácticas que resultaron útiles para el avance del proyecto y aquellas que no aportaron el resultado esperado. También se registrarán los problemas encontrados, las soluciones aplicadas y las recomendaciones para futuros desarrollos similares.
+
+	\item Archivado de la documentación del proyecto.
+
+	El responsable organizará y respaldará toda la documentación generada durante el proyecto. Se incluirán el código fuente, diagramas, registros de pruebas, informes de avance, memoria final, presupuesto actualizado y material utilizado para la presentación.
+
+	La documentación quedará almacenada en el repositorio del proyecto y en una copia local de respaldo.
+
+	\item Presentación pública y agradecimiento a los interesados.
+
+	El responsable redactará la memoria final del Trabajo Final, incorporando la descripción del sistema, las decisiones de diseño, los resultados de validación y las conclusiones. Luego se realizará la presentación pública en el marco de la Carrera de Especialización en Sistemas Embebidos.
+
+	En el marco de dicha presentación, el responsable del proyecto organizará un agradecimiento formal al director, al jurado y a las personas que hayan colaborado durante el desarrollo.
+
+	El financiamiento de cualquier gasto asociado será asumido por el responsable del proyecto.
+\end{enumerate}
 
 
 \end{document}
