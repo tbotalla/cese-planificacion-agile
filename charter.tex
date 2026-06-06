@@ -66,7 +66,7 @@ Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios 
 1      & Se completa hasta el punto 5 inclusive                & {10} de {mayo} de 2026 \\ \hline
 2      & Se completa hasta el punto 9 inclusive                & {17} de {mayo} de 2026 \\ \hline
 3      & Se completa hasta el punto 12 inclusive                & {24} de {mayo} de 2026 \\ \hline
-%4      & Se completa el plan	                                 & {día} de {mes} de 202X \\ \hline
+4      & Se completa el plan de proyecto                        & {31} de {mayo} de 2026 \\ \hline
 
 % Si hay más correcciones pasada la versión 4 también se deben especificar acá
 
@@ -246,9 +246,9 @@ Los requerimientos se agrupan por afinidad y se priorizan según su aporte al ob
 Para estimar el esfuerzo relativo entre historias se decidió utilizar story points. Cada historia se evalúa en tres dimensiones, cada una con un peso según la siguiente tabla:
 
 \begin{itemize}
-  \item \textbf{Dificultad} (cantidad de trabajo a realizar): bajo → 1, medio → 3, alto → 5.
-  \item \textbf{Complejidad} (nivel de sofisticación del trabajo): bajo → 1, medio → 5, alto → 13.
-  \item \textbf{Incertidumbre} (riesgo o falta de experiencia en la tarea): bajo → 2, medio → 3, alto → 5.
+  \item Dificultad (cantidad de trabajo a realizar): bajo → 1, medio → 3, alto → 5.
+  \item Complejidad (nivel de sofisticación del trabajo): bajo → 1, medio → 5, alto → 13.
+  \item Incertidumbre (riesgo o falta de experiencia en la tarea): bajo → 2, medio → 3, alto → 5.
 \end{itemize}
 
 La suma de los tres pesos se aproxima al número de Fibonacci más cercano (1, 2, 3, 5, 8, 13, 21) para obtener el story point final. Como referencia de 1 story point se considera el esfuerzo de integrar un sensor en bus I2C y establecer la comunicación con el microcontrolador.
@@ -415,12 +415,12 @@ Cantidad total de horas: 622 h.
 
 El diagrama de \textit{Activity on Node} se construyó a partir del desglose de tareas de la sección anterior. Cada nodo representa una tarea, la variable \textit{t} indica la duración en horas de trabajo y las flechas muestran la relación de precedencia entre actividades. Las flechas punteadas indican dependencias opcionales.
 
-Las tareas de desarrollo de sensores (IMU y barómetro, GPS y temperatura) y la aplicación móvil se ejecutan en \textbf{paralelo} una vez finalizado el diseño del sistema. Dentro de cada grupo las subtareas son secuenciales, pero los grupos en sí no tienen dependencia entre sí. Los colores indican:
+Las tareas de desarrollo de sensores (IMU y barómetro, GPS y temperatura) y la aplicación móvil se ejecutan en paralelo una vez finalizado el diseño del sistema. Dentro de cada grupo las subtareas son secuenciales, pero los grupos en sí no tienen dependencia entre sí. Los colores indican:
 
 \begin{itemize}
-  \item \textbf{Rojo}: actividades obligatorias del proyecto.
-  \item \textbf{Amarillo}: actividades semicríticas u opcionales.
-  \item \textbf{Gris}: nodos terminales (inicio y fin).
+  \item Rojo: actividades obligatorias del proyecto.
+  \item Amarillo: actividades semicríticas u opcionales.
+  \item Gris: nodos terminales (inicio y fin).
 \end{itemize}
 
 \begin{figure}[htpb]
@@ -668,7 +668,7 @@ Las acciones de verificación y validación se definen a partir de los requerimi
 	\end{itemize}
 \item Requerimiento 4. Registro de temperatura.
 	\begin{itemize}
-	\item Verificación: registrar temperatura en microSD con marca de tiempo y unidades en grados Celsius.
+	\item Verificación: registrar la temperatura en la tarjeta microSD con marca de tiempo y unidades en grados Celsius.
 	\item Validación: comparar la lectura contra una referencia de banco.
 	\end{itemize}
 \item Requerimiento 5. Uso de DMA para lecturas de IMU.
@@ -723,7 +723,7 @@ Al finalizar el proyecto se realizará una reunión de cierre entre el responsab
 
 	\item Archivado de la documentación del proyecto.
 
-	El responsable organizará y respaldará toda la documentación generada durante el proyecto. Se incluirán el código fuente, diagramas, registros de pruebas, informes de avance, memoria final, presupuesto actualizado y material utilizado para la presentación.
+	El responsable organizará y respaldará toda la documentación generada durante el proyecto. Se incluirá el código fuente, diagramas, registros de pruebas, informes de avance, memoria final, presupuesto actualizado y material utilizado para la presentación.
 
 	La documentación quedará almacenada en el repositorio del proyecto y en una copia local de respaldo.
 
